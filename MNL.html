@@ -181,6 +181,9 @@ $(document).ready(function () {
 <li>
   <a href="apps.html">Shiny Apps</a>
 </li>
+<li>
+  <a href="statedpref.html">Stated Preference Survey</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -200,7 +203,7 @@ $(document).ready(function () {
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the Stated Preference Survey.</p>
+<p>This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>.</p>
 <div id="the-data" class="section level3">
 <h3>The Data</h3>
 <p>First, we read in the data which is in the CSV format (Comma Separated Values).</p>
@@ -303,7 +306,7 @@ summary(income.model1)</code></pre>
 ## Residual standard error: 1.317 on 480 degrees of freedom
 ## Multiple R-squared:  0.4055, Adjusted R-squared:  0.3968 
 ## F-statistic: 46.77 on 7 and 480 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>The model has an adjusted <span class="math inline">\(R^2\)</span> value of 0.397. <code>HouseholdType</code> and <code>Residential</code> are not significant at the 90% significance level.</p>
+<p>The model has an adjusted <span class="math inline">\(R^2\)</span> value of 0.39682. <code>HouseholdType</code> and <code>Residential</code> are not significant at the 90% significance level.</p>
 </div>
 <div id="removing-householdtype-and-residential" class="section level3">
 <h3>Removing <code>HouseholdType</code> and <code>Residential</code></h3>
@@ -335,13 +338,11 @@ summary(income.model2)</code></pre>
 ## Residual standard error: 1.315 on 482 degrees of freedom
 ## Multiple R-squared:  0.4053, Adjusted R-squared:  0.3991 
 ## F-statistic: 65.69 on 5 and 482 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code>#Adjusted R-squared:  0.3991 
-#least sig is int and concession</code></pre>
-<p>This model has an increased adjusted <span class="math inline">\(R^2\)</span> value of 0.399. <code>Concession</code> and <code>(Intercept)</code> are the least significant variables.</p>
+<p>This model has an increased adjusted <span class="math inline">\(R^2\)</span> value of 0.39911. <code>Concession</code> and <code>(Intercept)</code> are the least significant variables.</p>
 </div>
 <div id="variable-selection" class="section level3">
 <h3>Variable Selection</h3>
-<p>Several other combinations of variables were tested. The combination of variable which gave the highest adjusted <span class="math inline">\(R^2\)</span> was chosen.</p>
+<p>Several other combinations of variables were tested. The combination of variables which gave the highest adjusted <span class="math inline">\(R^2\)</span> was chosen.</p>
 <table style="width:90%;">
 <colgroup>
 <col width="8%" />
@@ -447,7 +448,7 @@ mask = rep(x = sample.split(rep(1, 125), SplitRatio = 0.7),
            each = 8)
 modechoice.training = subset(modechoice, mask==TRUE)
 modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
-<p>Here we observe that all 8 choice tasks of an individual are preserved. <code>Case</code> refers to the individual, while <code>Task</code> refers to the choice task.</p>
+<p>The table below shows the first 16 rows of the training set. All 8 choice tasks of an individual are preserved. <code>Case</code> refers to the individual, while <code>Task</code> refers to the choice task.</p>
 <pre class="r"><code>kable(modechoice.training[1:16,2:6])</code></pre>
 <table>
 <thead>
@@ -594,7 +595,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </div>
 <div id="creating-an-mlogit-object" class="section level3">
 <h3>Creating an <code>mlogit()</code> Object</h3>
-<p>We use the <code>mlogit</code> package.</p>
+<p>We use the <code>mlogit</code> package which will help us conduct Multinomial Logistic Regression.</p>
 <pre class="r"><code>library(mlogit)</code></pre>
 <pre class="r"><code>S &lt;- mlogit.data(modechoice.training,
                  shape=&quot;wide&quot;,
@@ -609,7 +610,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <p>The Akaike Information Criterion (AIC) is…. a lower AIC value is better. The formula is given by:</p>
 <p><span class="math display">\[AIC = -2 LL(\hat\beta) + 2|\hat\beta|\]</span></p>
 <p>where <span class="math inline">\(LL(\hat\beta)\)</span> is the Log-likelihood of the estimated model and <span class="math inline">\(|\hat\beta|\)</span> is the number of coefficients to be estimated (including the intercept).</p>
-<p>For convenience, we define a function <code>calc.AIC</code> that takes in a model and outputs the AIC value.</p>
+<p>For convenience, we define a function <code>calc.AIC()</code> that takes in a model and returns its AIC value.</p>
 <pre class="r"><code>calc.AIC &lt;- function (model) {
   return(-2*model$logLik[1] + 2*length(model$coefficients))
 }</code></pre>

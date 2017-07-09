@@ -8,7 +8,7 @@ output:
 
 # Introduction
 
-This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the Stated Preference Survey.
+This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>.
 
 ### The Data
 
@@ -81,7 +81,7 @@ income.model1 <- lm(Income ~ Age + Gender + HouseholdType +
 summary(income.model1)
 ```
 
-The model has an adjusted $R^2$ value of `r round(summary(income.model1)$adj.r.squared, 3)`. `HouseholdType` and `Residential` are not significant at the 90% significance level.
+The model has an adjusted $R^2$ value of `r round(summary(income.model1)$adj.r.squared, 5)`. `HouseholdType` and `Residential` are not significant at the 90% significance level.
 
 ### Removing `HouseholdType` and `Residential`
 
@@ -92,15 +92,13 @@ income.model2 <- lm(Income ~ Age + Gender +HouseholdSize + Cars + Concession,
                     data=incometraining)
 
 summary(income.model2)
-#Adjusted R-squared:  0.3991 
-#least sig is int and concession
 ```
 
-This model has an increased adjusted $R^2$ value of `r round(summary(income.model2)$adj.r.squared, 3)`. `Concession` and `(Intercept)` are the least significant variables.
+This model has an increased adjusted $R^2$ value of `r round(summary(income.model2)$adj.r.squared, 5)`. `Concession` and `(Intercept)` are the least significant variables.
 
 ### Variable Selection
 
-Several other combinations of variables were tested. The combination of variable which gave the highest adjusted $R^2$ was chosen.
+Several other combinations of variables were tested. The combination of variables which gave the highest adjusted $R^2$ was chosen.
 
 ```{r results = 'hide', echo=FALSE}
 #without concession
@@ -176,7 +174,7 @@ modechoice.test = subset(modechoice, mask==FALSE)
 library(knitr)
 ```
 
-Here we observe that all 8 choice tasks of an individual are preserved. `Case` refers to the individual, while `Task` refers to the choice task.
+The table below shows the first 16 rows of the training set. All 8 choice tasks of an individual are preserved. `Case` refers to the individual, while `Task` refers to the choice task.
 
 ```{r}
 kable(modechoice.training[1:16,2:6])
@@ -184,7 +182,7 @@ kable(modechoice.training[1:16,2:6])
 
 ### Creating an `mlogit()` Object
 
-We use the `mlogit` package.
+We use the `mlogit` package which will help us conduct Multinomial Logistic Regression.
 
 ```{r message=FALSE, warning=FALSE}
 library(mlogit)
@@ -209,7 +207,7 @@ $$AIC = -2 LL(\hat\beta) + 2|\hat\beta|$$
 
 where $LL(\hat\beta)$ is the Log-likelihood of the estimated model and $|\hat\beta|$ is the number of coefficients to be estimated (including the intercept).
 
-For convenience, we define a function `calc.AIC` that takes in a model and outputs the AIC value.
+For convenience, we define a function `calc.AIC()` that takes in a model and returns its AIC value.
 
 ```{r}
 calc.AIC <- function (model) {

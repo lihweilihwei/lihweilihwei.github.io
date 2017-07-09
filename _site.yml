@@ -4,6 +4,6 @@ navbar:
   title: "My Website"
   left:
     - text: "Index"
-      href: Index.html
+      href: index.html
     - text: "Main"
       href: MNL - R Markdown.html

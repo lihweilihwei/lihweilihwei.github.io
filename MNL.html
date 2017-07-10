@@ -190,7 +190,7 @@ $(document).ready(function () {
   <a href="MNL.html">MNL</a>
 </li>
 <li>
-  <a href="apps.html">Shiny Apps</a>
+  <a href="apps.html">Interactive R</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -209,9 +209,12 @@ $(document).ready(function () {
 </div>
 
 
+<hr>
+<p><br></br></p>
 <div id="introduction" class="section level3">
 <h3>1 Introduction</h3>
 <p>This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>. Multinomial Logistic Regression serves to predict an individual’s mode choice (public bus, shared bicycles/PMDs, or SAAVs) using inputs such as the individual’s demographics, mode specific variables and non-mode specific variables.</p>
+<p><br></br></p>
 </div>
 <div id="the-data" class="section level3">
 <h3>2 The Data</h3>
@@ -219,6 +222,8 @@ $(document).ready(function () {
 <pre class="r"><code>modechoice &lt;- read.csv(&quot;ModeChoice.csv&quot;)</code></pre>
 <p>Looking at the structure of the dataset <code>str()</code>, it contains 1000 observations of 40 variables.</p>
 <pre class="r"><code>str(modechoice)</code></pre>
+<p><br></br></p>
+<hr>
 </div>
 <div id="predicting-na-incomes-with-linear-regression" class="section level3">
 <h3>3.1 Predicting “NA” Incomes with Linear Regression</h3>
@@ -227,6 +232,7 @@ $(document).ready(function () {
 <pre class="r"><code>incomenotNA &lt;- subset(modechoice, modechoice$Income != &quot;NA&quot;)
 incomeNA &lt;- subset(modechoice,is.na(modechoice$Income))</code></pre>
 <p>There are 752 observations with stated incomes and 248 observations where income is <code>NA</code>.</p>
+<p><br></br></p>
 </div>
 <div id="creating-training-and-test-sets" class="section level3">
 <h3>3.2 Creating Training and Test Sets</h3>
@@ -238,6 +244,7 @@ split &lt;- sample.split(incomenotNA$Age, SplitRatio = 0.65)
 
 incometraining &lt;- subset(incomenotNA,split==TRUE)
 incometest &lt;- subset(incomenotNA,split==FALSE)</code></pre>
+<p><br></br></p>
 </div>
 <div id="creating-a-linear-regression-model" class="section level3">
 <h3>3.3 Creating a Linear Regression Model</h3>
@@ -312,6 +319,7 @@ summary(income.model1)</code></pre>
 ## Multiple R-squared:  0.4055, Adjusted R-squared:  0.3968 
 ## F-statistic: 46.77 on 7 and 480 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The model has an adjusted <span class="math inline">\(R^2\)</span> value of 0.39682. <code>HouseholdType</code> and <code>Residential</code> are not significant at the 90% significance level.</p>
+<p><br></br></p>
 </div>
 <div id="removing-householdtype-and-residential" class="section level3">
 <h3>3.4 Removing <code>HouseholdType</code> and <code>Residential</code></h3>
@@ -344,6 +352,7 @@ summary(income.model2)</code></pre>
 ## Multiple R-squared:  0.4053, Adjusted R-squared:  0.3991 
 ## F-statistic: 65.69 on 5 and 482 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>This model has an increased adjusted <span class="math inline">\(R^2\)</span> value of 0.39911. <code>Concession</code> and <code>(Intercept)</code> are the least significant variables.</p>
+<p><br></br></p>
 </div>
 <div id="variable-selection" class="section level3">
 <h3>3.5 Variable Selection</h3>
@@ -444,6 +453,8 @@ modechoice$Income &lt;- ifelse(is.na(modechoice$Income),
                             NAincomeprediction,
                             modechoice$Income)</code></pre>
 <p>Now that all entries in the dataset have no <code>NA</code> values, we can proceed to conduct Multinomial Logistic Regression.</p>
+<p><br></br></p>
+<hr>
 </div>
 <div id="generating-training-and-test-sets" class="section level3">
 <h3>4.1 Generating Training and Test Sets</h3>
@@ -597,6 +608,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
+<p><br></br></p>
 </div>
 <div id="creating-an-mlogit-object" class="section level3">
 <h3>4.2 Creating an <code>mlogit()</code> Object</h3>
@@ -609,6 +621,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
                  sep=&quot;&quot;,
                  alt.levels=c(&quot;A.bus&quot;,&quot;A.cyclingPMD&quot;,&quot;A.saav&quot;),
                  id.var=&quot;Case&quot;)</code></pre>
+<p><br></br></p>
 </div>
 <div id="calculating-aic" class="section level3">
 <h3>4.3 Calculating AIC</h3>
@@ -619,6 +632,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <pre class="r"><code>calc.AIC &lt;- function (model) {
   return(-2*model$logLik[1] + 2*length(model$coefficients))
 }</code></pre>
+<p><br></br></p>
 </div>
 <div id="variable-selection-1" class="section level3">
 <h3>4.4 Variable Selection</h3>
@@ -730,7 +744,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>conclusion: M2 is the better model due to lower AIC, but if i were to include wait, i would take M4 due to how the p value when wait+ivvt is lower than in just wait. now we include person attributes too building upon M2</p>
+<p>Model 2 the better model as it has the lowest AIC. We now build upon Model 2 by including individual-specific attributes.</p>
 <table>
 <colgroup>
 <col width="5%" />
@@ -907,7 +921,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>concession was not stated for SAAV though. now we try adding the other mode variables that we removed just now</p>
+<p>Now we try adding the other mode-specific variables that we removed just now.</p>
 <table>
 <colgroup>
 <col width="5%" />
@@ -999,7 +1013,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>conclusion: M11 is the best due to lowest AIC and highest proportion of significant coeffs. now we include person attributes too building upon M4</p>
+<p>Model 11 is the best as it has the lowest AIC and highest proportion of significant coefficients. Now we build upon Model 4 by including individual-specific attributes.</p>
 <table>
 <colgroup>
 <col width="5%" />
@@ -1159,6 +1173,31 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
+<p>Overall, Model 23 is the best model with the lowest AIC value.</p>
+<p><br></br></p>
+</div>
+<div id="predicting-mode-choice" class="section level3">
+<h3>4.5 Predicting Mode Choice</h3>
+<p>We use the <code>predict()</code> function to give the probability of an individual choosing a particular mode.</p>
+<pre class="r"><code>P &lt;- predict(M23, newdata = S, type = &quot;response&quot;)
+P[1,]</code></pre>
+<pre><code>##        A.bus A.cyclingPMD       A.saav 
+##    0.2783367    0.6137458    0.1079175</code></pre>
+<p>For example, the individual corresponding to the first row will choose the bus with a 27.8% chance, Shared Bicycles/PMDs with a 61.4% chance, and the SAAV with a 10.8% chance.</p>
+<p>We let the predicted choice to be the most likely alternative (highest chance of being chosen).</p>
+<pre class="r"><code>PredictedChoice &lt;- apply(P,1,which.max)</code></pre>
+<p>Using a confusion matrix, we compare the actual choice in the training set with the predicted choice by the model.</p>
+<pre class="r"><code>ActualChoice &lt;- modechoice.training$A
+
+table(PredictedChoice, ActualChoice)</code></pre>
+<pre><code>##                ActualChoice
+## PredictedChoice A.bus A.cyclingPMD A.saav
+##               1    68           19     46
+##               2    26           42     17
+##               3   132           64    282</code></pre>
+<p>The diagonal entries of the confusion matrix are the instances where the model correctly predicts the actual choice of the individual. Accuracy is calculated by finding the proportion of instances where the model correctly predicted the actual choice. This model has an accuracy of 56.32%.</p>
+<p><br></br></p>
+<hr>
 </div>
 <div id="blah-blah-blah" class="section level3">
 <h3>Blah Blah Blah</h3>

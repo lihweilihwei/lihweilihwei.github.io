@@ -12,7 +12,7 @@ navbar:
     - text: "MNL"
       # icon: fa-home    # you can add icons
       href: MNL.html
-    - text: "Shiny Apps"
+    - text: "Interactive R"
       href: apps.html
 
       

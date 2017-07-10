@@ -6,9 +6,15 @@ output:
   
 ---
 
+<hr>
+
+<br></br>
+
 ### 1 Introduction
 
 This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>. Multinomial Logistic Regression serves to predict an individual's mode choice (public bus, shared bicycles/PMDs, or SAAVs) using inputs such as the individual's demographics, mode specific variables and non-mode specific variables.
+
+<br></br>
 
 ### 2 The Data
 
@@ -24,6 +30,10 @@ Looking at the structure of the dataset `str()`, it contains 1000 observations o
 str(modechoice)
 ```
 
+<br></br>
+
+<hr>
+
 ### 3.1 Predicting "NA" Incomes with Linear Regression
 
 Some of the entries in the `Income` column are `NA`. To fill this missing information, we used linear regression to predict their values.
@@ -36,6 +46,8 @@ incomeNA <- subset(modechoice,is.na(modechoice$Income))
 ```
 
 There are `r dim(incomenotNA)[1]` observations with stated incomes and `r dim(incomeNA)[1]` observations where income is `NA`. 
+
+<br></br>
 
 ### 3.2 Creating Training and Test Sets
 
@@ -54,6 +66,8 @@ split <- sample.split(incomenotNA$Age, SplitRatio = 0.65)
 incometraining <- subset(incomenotNA,split==TRUE)
 incometest <- subset(incomenotNA,split==FALSE)
 ```
+
+<br></br>
 
 ### 3.3 Creating a Linear Regression Model
 
@@ -81,6 +95,8 @@ summary(income.model1)
 
 The model has an adjusted $R^2$ value of `r round(summary(income.model1)$adj.r.squared, 5)`. `HouseholdType` and `Residential` are not significant at the 90% significance level.
 
+<br></br>
+
 ### 3.4 Removing `HouseholdType` and `Residential`
 
 We remove the insignificant variables from the model.
@@ -93,6 +109,8 @@ summary(income.model2)
 ```
 
 This model has an increased adjusted $R^2$ value of `r round(summary(income.model2)$adj.r.squared, 5)`. `Concession` and `(Intercept)` are the least significant variables.
+
+<br></br>
 
 ### 3.5 Variable Selection
 
@@ -156,6 +174,10 @@ modechoice$Income <- ifelse(is.na(modechoice$Income),
 
 Now that all entries in the dataset have no `NA` values, we can proceed to conduct Multinomial Logistic Regression.
 
+<br></br>
+
+<hr>
+
 ### 4.1 Generating Training and Test Sets
 
 Each row in the dataset corresponds to a choice task of a particular individual. We want to randomly split the individuals into the training or test set, while keeping all 8 choice tasks intact.
@@ -178,6 +200,8 @@ The table below shows the first 16 rows of the training set. All 8 choice tasks 
 kable(modechoice.training[1:16,2:6])
 ```
 
+<br></br>
+
 ### 4.2 Creating an `mlogit()` Object
 
 We use the `mlogit` package which will help us conduct Multinomial Logistic Regression.
@@ -196,6 +220,7 @@ S <- mlogit.data(modechoice.training,
                  id.var="Case")
 ```
 
+<br></br>
 
 ### 4.3 Calculating AIC
 
@@ -355,6 +380,7 @@ summary(M23)
 AIC(M23) #1308.912
 ```
 
+<br></br>
 
 ### 4.4 Variable Selection
 
@@ -365,7 +391,7 @@ AIC(M23) #1308.912
 |3    |$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M3), 3)`|
 |4    |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M4), 3)`|
 
-conclusion: M2 is the better model due to lower AIC, but if i were to include wait, i would take M4 due to how the p value when wait+ivvt is lower than in just wait. now we include person attributes too building upon M2
+Model 2 the better model as it has the lowest AIC. We now build upon Model 2 by including individual-specific attributes.
 
 |Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
@@ -378,7 +404,7 @@ conclusion: M2 is the better model due to lower AIC, but if i were to include wa
 |12   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |`r round(calc.AIC(M12), 3)`|
 |13   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M13), 3)`|
 
-concession was not stated for SAAV though. now we try adding the other mode variables that we removed just now
+Now we try adding the other mode-specific variables that we removed just now.
 
 |Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
@@ -386,7 +412,7 @@ concession was not stated for SAAV though. now we try adding the other mode vari
 |15   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M15), 3)`|
 |16   |$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M16), 3)`|
 
-conclusion: M11 is the best due to lowest AIC and highest proportion of significant coeffs. now we include person attributes too building upon M4
+Model 11 is the best as it has the lowest AIC and highest proportion of significant coefficients. Now we build upon Model 4 by including individual-specific attributes.
 
 |Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
@@ -398,6 +424,40 @@ conclusion: M11 is the best due to lowest AIC and highest proportion of signific
 |22   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |`r round(calc.AIC(M22), 3)`|
 |23   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |`r round(calc.AIC(M23), 3)`|
 
+Overall, Model 23 is the best model with the lowest AIC value.
+
+<br></br>
+
+### 4.5 Predicting Mode Choice
+
+We use the `predict()` function to give the probability of an individual choosing a particular mode.
+
+```{r}
+P <- predict(M23, newdata = S, type = "response")
+P[1,]
+```
+
+For example, the individual corresponding to the first row will choose the bus with a `r round(P[1,1]*100, 1)`% chance, Shared Bicycles/PMDs with a `r round(P[1,2]*100, 1)`% chance, and the SAAV with a `r round(P[1,3]*100, 1)`% chance.
+
+We let the predicted choice to be the most likely alternative (highest chance of being chosen).
+
+```{r}
+PredictedChoice <- apply(P,1,which.max)
+```
+
+Using a confusion matrix, we compare the actual choice in the training set with the predicted choice by the model. 
+
+```{r}
+ActualChoice <- modechoice.training$A
+
+table(PredictedChoice, ActualChoice)
+```
+
+The diagonal entries of the confusion matrix are the instances where the model correctly predicts the actual choice of the individual. Accuracy is calculated by finding the proportion of instances where the model correctly predicted the actual choice. This model has an accuracy of `r round(((68+42+282)/696)*100, 2)`%.
+
+<br></br>
+
+<hr>
 
 ### Blah Blah Blah
 

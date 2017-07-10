@@ -1,8 +1,10 @@
 ---
-title: "Hello"
+title: ""
 output: 
   html_document:
       theme: readable
 ---
+
+`r Sys.time()`
 
 Click on the navigation bar above.

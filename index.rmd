@@ -5,6 +5,21 @@ output:
       theme: readable
 ---
 
-`r Sys.time()`
+```{r echo=FALSE}
+hour = as.numeric(format(Sys.time(), "%H"))
 
-Click on the navigation bar above.
+if (hour < 5){
+  string = "Hello"
+} else if (hour < 12){
+  string = "Good Morning"
+} else if(hour < 17){
+  string = "Good Afternoon"
+} else {
+  string = "Good Evening"
+}
+```
+
+
+<center><h1>**`r string`**</h1></center>
+
+<center>Click on the navigation bar above.</center>

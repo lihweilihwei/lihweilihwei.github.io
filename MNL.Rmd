@@ -1,18 +1,18 @@
 ---
-title: "MNL"
+title: "Multinomial Logit Model (MNL)"
 output: 
   html_document:
       theme: readable
   
 ---
 
-# Introduction
+### 1 Introduction
 
-This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>.
+This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>. Multinomial Logistic Regression serves to predict an individual's mode choice (public bus, shared bicycles/PMDs, or SAAVs) using inputs such as the individual's demographics, mode specific variables and non-mode specific variables.
 
-### The Data
+### 2 The Data
 
-First, we read in the data which is in the CSV format (Comma Separated Values).
+First, we read in the data from the stated preference survey which is in the CSV format (Comma Separated Values).
 
 ```{r results = 'hide'}
 modechoice <- read.csv("ModeChoice.csv")
@@ -24,7 +24,7 @@ Looking at the structure of the dataset `str()`, it contains 1000 observations o
 str(modechoice)
 ```
 
-### Predicting "NA" Incomes with Linear Regression
+### 3.1 Predicting "NA" Incomes with Linear Regression
 
 Some of the entries in the `Income` column are `NA`. To fill this missing information, we used linear regression to predict their values.
 
@@ -33,13 +33,11 @@ We separate the dataset into two: one with stated incomes, and another which hav
 ```{r}
 incomenotNA <- subset(modechoice, modechoice$Income != "NA")
 incomeNA <- subset(modechoice,is.na(modechoice$Income))
-dim(incomenotNA)
-dim(incomeNA)
 ```
 
 There are `r dim(incomenotNA)[1]` observations with stated incomes and `r dim(incomeNA)[1]` observations where income is `NA`. 
 
-### Creating Training and Test Sets
+### 3.2 Creating Training and Test Sets
 
 We now create training and test sets from the observations where incomes are stated (`incomenotNA`). The `caTools` package is used.
 
@@ -57,7 +55,7 @@ incometraining <- subset(incomenotNA,split==TRUE)
 incometest <- subset(incomenotNA,split==FALSE)
 ```
 
-### Creating a Linear Regression Model
+### 3.3 Creating a Linear Regression Model
 
 We now create a linear regression. The first model includes all demographic information of the individual:
 
@@ -83,7 +81,7 @@ summary(income.model1)
 
 The model has an adjusted $R^2$ value of `r round(summary(income.model1)$adj.r.squared, 5)`. `HouseholdType` and `Residential` are not significant at the 90% significance level.
 
-### Removing `HouseholdType` and `Residential`
+### 3.4 Removing `HouseholdType` and `Residential`
 
 We remove the insignificant variables from the model.
 
@@ -96,7 +94,7 @@ summary(income.model2)
 
 This model has an increased adjusted $R^2$ value of `r round(summary(income.model2)$adj.r.squared, 5)`. `Concession` and `(Intercept)` are the least significant variables.
 
-### Variable Selection
+### 3.5 Variable Selection
 
 Several other combinations of variables were tested. The combination of variables which gave the highest adjusted $R^2$ was chosen.
 
@@ -134,7 +132,7 @@ summary(income.model5)
 |4    |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|`r round(summary(income.model4)$adj.r.squared, 5)`|
 |5    |$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|`r round(summary(income.model5)$adj.r.squared, 5)`|
 
-Model 2 has the lowest adjusted $R^2$. We now evaluate this model on the test set by calculating the test $R^2$. This is given by the formula:
+Model 2 has the highest adjusted $R^2$. We now evaluate this model on the test set by calculating the test $R^2$. This is given by the formula:
 
 $$R^2 = 1 - \frac{SSE}{SST}$$
 
@@ -146,7 +144,7 @@ sse <- sum((incomeprediction-incometest$Income)^2)
 sst <- sum((incometest$Income-mean(incometraining$Income))^2)
 ```
 
-The test $R^2$ is `r round(1-sse/sst, 5)`. We now use this model to predict the `NA` entries in the dataset.
+The test $R^2$ for model 2 is `r round(1-sse/sst, 5)`. We now use model 2 to predict the `NA` entries in the dataset.
 
 ```{r}
 NAincomeprediction <- predict(income.model2, newdata=incomeNA) 
@@ -158,7 +156,7 @@ modechoice$Income <- ifelse(is.na(modechoice$Income),
 
 Now that all entries in the dataset have no `NA` values, we can proceed to conduct Multinomial Logistic Regression.
 
-### Generating Training and Test Sets
+### 4.1 Generating Training and Test Sets
 
 Each row in the dataset corresponds to a choice task of a particular individual. We want to randomly split the individuals into the training or test set, while keeping all 8 choice tasks intact.
 
@@ -180,7 +178,7 @@ The table below shows the first 16 rows of the training set. All 8 choice tasks 
 kable(modechoice.training[1:16,2:6])
 ```
 
-### Creating an `mlogit()` Object
+### 4.2 Creating an `mlogit()` Object
 
 We use the `mlogit` package which will help us conduct Multinomial Logistic Regression.
 
@@ -199,7 +197,7 @@ S <- mlogit.data(modechoice.training,
 ```
 
 
-### Calculating AIC
+### 4.3 Calculating AIC
 
 The Akaike Information Criterion (AIC) is.... a lower AIC value is better. The formula is given by:
 

@@ -4,13 +4,17 @@ navbar:
   title: ""
   # type: inverse  # Changes the colour
   left:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "Stated Preference Survey"
+      href: statedpref.html
     - text: "MNL"
       # icon: fa-home    # you can add icons
       href: MNL.html
     - text: "Shiny Apps"
       href: apps.html
-    - text: "Stated Preference Survey"
-      href: statedpref.html
+
       
       
 # You can add sub menus.

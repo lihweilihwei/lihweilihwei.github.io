@@ -5,6 +5,8 @@ output:
       theme: readable
 ---
 
+The survey had 125 respondents complete 8 choice tasks, where each choice task required the respondents to choose their desired mode given a specific scenario and a particular set of attribute values. Other questions on like age, income, and type of residence were asked.
+
 The stated preference survey was conducted with three aims:
 
 1. To ascertain the importance of attributes that significantly affect the mode choice of commuters.

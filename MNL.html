@@ -11,7 +11,7 @@
 
 
 
-<title>MNL</title>
+<title>Multinomial Logit Model (MNL)</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,6 +22,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -176,13 +177,20 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="statedpref.html">Stated Preference Survey</a>
+</li>
+<li>
   <a href="MNL.html">MNL</a>
 </li>
 <li>
   <a href="apps.html">Shiny Apps</a>
-</li>
-<li>
-  <a href="statedpref.html">Stated Preference Survey</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -196,35 +204,32 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">MNL</h1>
+<h1 class="title toc-ignore">Multinomial Logit Model (MNL)</h1>
 
 </div>
 
 
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
-<p>This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>.</p>
+<div id="introduction" class="section level3">
+<h3>1 Introduction</h3>
+<p>This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>. Multinomial Logistic Regression serves to predict an individual’s mode choice (public bus, shared bicycles/PMDs, or SAAVs) using inputs such as the individual’s demographics, mode specific variables and non-mode specific variables.</p>
+</div>
 <div id="the-data" class="section level3">
-<h3>The Data</h3>
-<p>First, we read in the data which is in the CSV format (Comma Separated Values).</p>
+<h3>2 The Data</h3>
+<p>First, we read in the data from the stated preference survey which is in the CSV format (Comma Separated Values).</p>
 <pre class="r"><code>modechoice &lt;- read.csv(&quot;ModeChoice.csv&quot;)</code></pre>
 <p>Looking at the structure of the dataset <code>str()</code>, it contains 1000 observations of 40 variables.</p>
 <pre class="r"><code>str(modechoice)</code></pre>
 </div>
 <div id="predicting-na-incomes-with-linear-regression" class="section level3">
-<h3>Predicting “NA” Incomes with Linear Regression</h3>
+<h3>3.1 Predicting “NA” Incomes with Linear Regression</h3>
 <p>Some of the entries in the <code>Income</code> column are <code>NA</code>. To fill this missing information, we used linear regression to predict their values.</p>
 <p>We separate the dataset into two: one with stated incomes, and another which have <code>NA</code> for <code>Income</code>.</p>
 <pre class="r"><code>incomenotNA &lt;- subset(modechoice, modechoice$Income != &quot;NA&quot;)
-incomeNA &lt;- subset(modechoice,is.na(modechoice$Income))
-dim(incomenotNA)</code></pre>
-<pre><code>## [1] 752  40</code></pre>
-<pre class="r"><code>dim(incomeNA)</code></pre>
-<pre><code>## [1] 248  40</code></pre>
+incomeNA &lt;- subset(modechoice,is.na(modechoice$Income))</code></pre>
 <p>There are 752 observations with stated incomes and 248 observations where income is <code>NA</code>.</p>
 </div>
 <div id="creating-training-and-test-sets" class="section level3">
-<h3>Creating Training and Test Sets</h3>
+<h3>3.2 Creating Training and Test Sets</h3>
 <p>We now create training and test sets from the observations where incomes are stated (<code>incomenotNA</code>). The <code>caTools</code> package is used.</p>
 <pre class="r"><code>library(caTools)</code></pre>
 <p>We set the random seed so that the results will be replicable. The training and test sets are obtained with a 65/35 split ratio.</p>
@@ -235,7 +240,7 @@ incometraining &lt;- subset(incomenotNA,split==TRUE)
 incometest &lt;- subset(incomenotNA,split==FALSE)</code></pre>
 </div>
 <div id="creating-a-linear-regression-model" class="section level3">
-<h3>Creating a Linear Regression Model</h3>
+<h3>3.3 Creating a Linear Regression Model</h3>
 <p>We now create a linear regression. The first model includes all demographic information of the individual:</p>
 <table>
 <thead>
@@ -309,7 +314,7 @@ summary(income.model1)</code></pre>
 <p>The model has an adjusted <span class="math inline">\(R^2\)</span> value of 0.39682. <code>HouseholdType</code> and <code>Residential</code> are not significant at the 90% significance level.</p>
 </div>
 <div id="removing-householdtype-and-residential" class="section level3">
-<h3>Removing <code>HouseholdType</code> and <code>Residential</code></h3>
+<h3>3.4 Removing <code>HouseholdType</code> and <code>Residential</code></h3>
 <p>We remove the insignificant variables from the model.</p>
 <pre class="r"><code>income.model2 &lt;- lm(Income ~ Age + Gender +HouseholdSize + Cars + Concession,
                     data=incometraining)
@@ -341,7 +346,7 @@ summary(income.model2)</code></pre>
 <p>This model has an increased adjusted <span class="math inline">\(R^2\)</span> value of 0.39911. <code>Concession</code> and <code>(Intercept)</code> are the least significant variables.</p>
 </div>
 <div id="variable-selection" class="section level3">
-<h3>Variable Selection</h3>
+<h3>3.5 Variable Selection</h3>
 <p>Several other combinations of variables were tested. The combination of variables which gave the highest adjusted <span class="math inline">\(R^2\)</span> was chosen.</p>
 <table style="width:90%;">
 <colgroup>
@@ -426,13 +431,13 @@ summary(income.model2)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Model 2 has the lowest adjusted <span class="math inline">\(R^2\)</span>. We now evaluate this model on the test set by calculating the test <span class="math inline">\(R^2\)</span>. This is given by the formula:</p>
+<p>Model 2 has the highest adjusted <span class="math inline">\(R^2\)</span>. We now evaluate this model on the test set by calculating the test <span class="math inline">\(R^2\)</span>. This is given by the formula:</p>
 <p><span class="math display">\[R^2 = 1 - \frac{SSE}{SST}\]</span></p>
 <p>where <span class="math inline">\(SSE\)</span> is the Sum of Squared Errors and <span class="math inline">\(SST\)</span> is the Sum of Squared Errors (Total).</p>
 <pre class="r"><code>incomeprediction &lt;- predict(income.model2, newdata=incometest)
 sse &lt;- sum((incomeprediction-incometest$Income)^2)
 sst &lt;- sum((incometest$Income-mean(incometraining$Income))^2)</code></pre>
-<p>The test <span class="math inline">\(R^2\)</span> is 0.37408. We now use this model to predict the <code>NA</code> entries in the dataset.</p>
+<p>The test <span class="math inline">\(R^2\)</span> for model 2 is 0.37408. We now use model 2 to predict the <code>NA</code> entries in the dataset.</p>
 <pre class="r"><code>NAincomeprediction &lt;- predict(income.model2, newdata=incomeNA) 
 
 modechoice$Income &lt;- ifelse(is.na(modechoice$Income),
@@ -441,7 +446,7 @@ modechoice$Income &lt;- ifelse(is.na(modechoice$Income),
 <p>Now that all entries in the dataset have no <code>NA</code> values, we can proceed to conduct Multinomial Logistic Regression.</p>
 </div>
 <div id="generating-training-and-test-sets" class="section level3">
-<h3>Generating Training and Test Sets</h3>
+<h3>4.1 Generating Training and Test Sets</h3>
 <p>Each row in the dataset corresponds to a choice task of a particular individual. We want to randomly split the individuals into the training or test set, while keeping all 8 choice tasks intact.</p>
 <pre class="r"><code>set.seed(0)
 mask = rep(x = sample.split(rep(1, 125), SplitRatio = 0.7),
@@ -594,7 +599,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </table>
 </div>
 <div id="creating-an-mlogit-object" class="section level3">
-<h3>Creating an <code>mlogit()</code> Object</h3>
+<h3>4.2 Creating an <code>mlogit()</code> Object</h3>
 <p>We use the <code>mlogit</code> package which will help us conduct Multinomial Logistic Regression.</p>
 <pre class="r"><code>library(mlogit)</code></pre>
 <pre class="r"><code>S &lt;- mlogit.data(modechoice.training,
@@ -606,7 +611,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
                  id.var=&quot;Case&quot;)</code></pre>
 </div>
 <div id="calculating-aic" class="section level3">
-<h3>Calculating AIC</h3>
+<h3>4.3 Calculating AIC</h3>
 <p>The Akaike Information Criterion (AIC) is…. a lower AIC value is better. The formula is given by:</p>
 <p><span class="math display">\[AIC = -2 LL(\hat\beta) + 2|\hat\beta|\]</span></p>
 <p>where <span class="math inline">\(LL(\hat\beta)\)</span> is the Log-likelihood of the estimated model and <span class="math inline">\(|\hat\beta|\)</span> is the number of coefficients to be estimated (including the intercept).</p>
@@ -947,7 +952,6 @@ topredict = S[1:3,]
 predict(M23, newdata = sample_data, type=&quot;response&quot;)
 
 #M23$coefficients[&quot;A.saav:Age&quot;]</code></pre>
-</div>
 </div>
 
 

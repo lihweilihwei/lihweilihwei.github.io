@@ -1,25 +1,37 @@
 ---
 title: ""
+runtime: shiny
 output: 
   html_document:
       theme: readable
 ---
 
-```{r echo=FALSE}
-hour = as.numeric(format(Sys.time(), "%H"))
+```{r echo=FALSE, eval=FALSE, results='hide'}
 
-if (hour < 5){
-  string = "Hello"
-} else if (hour < 12){
-  string = "Good Morning"
-} else if(hour < 17){
-  string = "Good Afternoon"
-} else {
-  string = "Good Evening"
-}
+string = reactive({
+  hour = as.numeric(format(Sys.time(), "%H"))
+
+  if (hour < 5){
+    string = "Hello"
+  } else if (hour < 12){
+    string = "Good Morning"
+  } else if(hour < 17){
+    string = "Good Afternoon"
+  } else {
+    string = "Good Evening"
+  }
+})
+
+renderText({
+  string()
+})
 ```
 
 
-<center><h1>**`r string`**</h1></center>
+<center><h3>**Waterborne Transportation in the Greater Southern Waterfront**</h3></center>
+
+<center>Add an introduction here.</center>
+
+<br></br>
 
 <center>Click on the navigation bar above.</center>

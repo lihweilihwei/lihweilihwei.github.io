@@ -620,6 +620,474 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
   return(-2*model$logLik[1] + 2*length(model$coefficients))
 }</code></pre>
 </div>
+<div id="variable-selection-1" class="section level3">
+<h3>4.4 Variable Selection</h3>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="5%" />
+<col width="8%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Model</th>
+<th align="center"><code>weather</code></th>
+<th align="center"><code>fare</code></th>
+<th align="center"><code>wait</code></th>
+<th align="center"><code>ivtt</code></th>
+<th align="center"><code>access</code></th>
+<th align="center"><code>Age</code></th>
+<th align="center"><code>Gender</code></th>
+<th align="center"><code>Income</code></th>
+<th align="center"><code>HouseholdType</code></th>
+<th align="center"><code>HouseholdSize</code></th>
+<th align="center"><code>Residential</code></th>
+<th align="center"><code>Cars</code></th>
+<th align="center"><code>Concession</code></th>
+<th align="left">AIC Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1357.116</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1333.944</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1334.169</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1335.254</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1326.97</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1328.847</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1320.019</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1323.093</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1328.914</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1324.68</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Model</strong></td>
+<td align="center"><code>weather</code></td>
+<td align="center"><code>fare</code></td>
+<td align="center"><code>wait</code></td>
+<td align="center"><code>ivtt</code></td>
+<td align="center"><code>access</code></td>
+<td align="center"><code>Age</code></td>
+<td align="center"><code>Gender</code></td>
+<td align="center"><code>Income</code></td>
+<td align="center"><code>HouseholdType</code></td>
+<td align="center"><code>HouseholdSize</code></td>
+<td align="center"><code>Residential</code></td>
+<td align="center"><code>Cars</code></td>
+<td align="center"><code>Concession</code></td>
+<td align="left"><strong>AIC Value</strong></td>
+</tr>
+<tr class="even">
+<td align="center">11</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1318.375</td>
+</tr>
+<tr class="odd">
+<td align="center">12</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="left">1319.543</td>
+</tr>
+<tr class="even">
+<td align="center">13</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="left">1318.999</td>
+</tr>
+<tr class="odd">
+<td align="center">14</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="left">1319.172</td>
+</tr>
+<tr class="even">
+<td align="center">15</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="left">1320.237</td>
+</tr>
+<tr class="odd">
+<td align="center">16</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="left">1320.235</td>
+</tr>
+<tr class="even">
+<td align="center">17</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1328.258</td>
+</tr>
+<tr class="odd">
+<td align="center">18</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1330.134</td>
+</tr>
+<tr class="even">
+<td align="center">19</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1322.806</td>
+</tr>
+<tr class="odd">
+<td align="center">20</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1325.969</td>
+</tr>
+<tr class="even">
+<td align="center">21</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1332.142</td>
+</tr>
+<tr class="odd">
+<td align="center">22</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1311.476</td>
+</tr>
+<tr class="even">
+<td align="center">23</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="left">1308.912</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Model</strong></td>
+<td align="center"><code>weather</code></td>
+<td align="center"><code>fare</code></td>
+<td align="center"><code>wait</code></td>
+<td align="center"><code>ivtt</code></td>
+<td align="center"><code>access</code></td>
+<td align="center"><code>Age</code></td>
+<td align="center"><code>Gender</code></td>
+<td align="center"><code>Income</code></td>
+<td align="center"><code>HouseholdType</code></td>
+<td align="center"><code>HouseholdSize</code></td>
+<td align="center"><code>Residential</code></td>
+<td align="center"><code>Cars</code></td>
+<td align="center"><code>Concession</code></td>
+<td align="left"><strong>AIC Value</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="blah-blah-blah" class="section level3">
 <h3>Blah Blah Blah</h3>
 <pre class="r"><code>library(mlogit)
@@ -839,78 +1307,80 @@ summary(M12)
 AIC(M12) #1319.543
 #cars coeff not sig at all
 
-M12 &lt;- mlogit(A ~ fare|weather+Age+HouseholdSize+Income+Concession, 
+M13 &lt;- mlogit(A ~ fare|weather+Age+HouseholdSize+Income+Concession, 
               data = S) 
-summary(M12)
+summary(M13)
 
-AIC(M12) #1318.999
+AIC(M13) #1318.999
 #concession was not stated for SAAV though
 
 #now we try adding the other mode variables that we removed just now
 
-M13 &lt;- mlogit(A ~ fare+wait|weather+Age+HouseholdSize+Income+Concession, 
-              data = S) 
-summary(M13)
-AIC(M13) #1319.172
-#not better than M11
-
-M14 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+HouseholdSize+Income+Concession, 
+M14 &lt;- mlogit(A ~ fare+wait|weather+Age+HouseholdSize+Income+Concession, 
               data = S) 
 summary(M14)
-AIC(M14) #1320.237
-#ivvt not sig at all and not better than M11
+AIC(M14) #1319.172
+#not better than M11
 
-M15 &lt;- mlogit(A ~ fare+ivvt|weather+Age+HouseholdSize+Income+Concession, 
+M15 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+HouseholdSize+Income+Concession, 
               data = S) 
 summary(M15)
-AIC(M15) #1320.235
+AIC(M15) #1320.237
+#ivvt not sig at all and not better than M11
+
+M16 &lt;- mlogit(A ~ fare+ivvt|weather+Age+HouseholdSize+Income+Concession, 
+              data = S) 
+summary(M16)
+AIC(M16) #1320.235
 #ivvt still not sig anw
 
 #conclusion: M11 is the best due to lowest AIC and highest proportion of significant coeffs
 
 # now we include person attributes too building upon M4
 
-M16 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age, 
+M17 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age, 
              data = S) 
-summary(M16)
-AIC(M16) #1328.258
-
-M17 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender, 
-              data = S) 
 summary(M17)
-AIC(M17) #1330.134
+AIC(M17) #1328.258
 
-M18 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType, 
+M18 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender, 
               data = S) 
 summary(M18)
-AIC(M18) #1322.806
+AIC(M18) #1330.134
 
-M19 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+HouseholdSize, 
+M19 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType, 
               data = S) 
 summary(M19)
-AIC(M19) #1325.969
+AIC(M19) #1322.806
 
-M20 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdSize, 
+M20 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+HouseholdSize, 
               data = S) 
 summary(M20)
-AIC(M20) #1332.142
+AIC(M20) #1325.969
 
-M21 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income, 
+M21 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdSize, 
               data = S) 
 summary(M21)
-AIC(M21) #1311.476
+AIC(M21) #1332.142
 
-M22 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars, 
+M22 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income, 
               data = S) 
 summary(M22)
-AIC(M22) #1308.912
+AIC(M22) #1311.476
 
-M23 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars+Concession, 
+M23 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars, 
               data = S) 
 summary(M23)
-AIC(M23) #1309.843
+AIC(M23) #1308.912
 
+# Cut here....
+M24 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars+Concession, 
+              data = S) 
+summary(M24)
+AIC(M24) #1309.843
+# Cut here....
 #conclusion: use M23 due to lowest AIC 
+# Use M23 actually.
 
 Likelihoodratio &lt;- 1-(-650.87/(696*log(1/3)))
 Likelihoodratio

@@ -213,7 +213,178 @@ calc.AIC <- function (model) {
 }
 ```
 
+```{r echo=FALSE, results='hide'}
+#mode related variables
 
+M1 <- mlogit(A ~ 1|weather,data=S)
+summary(M1)
+AIC(M1) #1357.116
+
+M2 <- mlogit(A ~ fare|weather, 
+            data = S) 
+summary(M2)
+AIC(M2) #1333.944
+
+M3 <- mlogit(A ~ fare+wait|weather, 
+             data = S) 
+summary(M3)
+AIC(M3) #1334.169 but mcfadden rsq increased slightly
+
+M4 <- mlogit(A ~ fare+wait+ivvt|weather, 
+             data = S) 
+summary(M4)
+AIC(M4) #1335.254 but mcfadden rsq increased slightly
+
+#conclusion: M2 is the better model due to lower AIC, but if i were to include wait, i would take M4 due to how the p value when wait+ivvt is lower than in just wait
+
+# now we include person attributes too building upon M2
+
+M5 <- mlogit(A ~ fare|weather+Age, 
+             data = S) 
+summary(M5)
+AIC(M5) #1326.97 
+#age sig for cycling
+
+M6 <- mlogit(A ~ fare|weather+Age+Gender, 
+             data = S) 
+summary(M6)
+AIC(M6) #1328.847 
+#AIC increased so gender is not to be added
+
+M7 <- mlogit(A ~ fare|weather+Age+HouseholdType, 
+             data = S) 
+summary(M7)
+AIC(M7) #1320.019
+#lowest AIC so far
+
+M8 <- mlogit(A ~ fare|weather+Age+HouseholdType+HouseholdSize, 
+             data = S) 
+summary(M8)
+AIC(M8) #1323.093
+#either householdtype or householdsize should stay
+
+M9 <- mlogit(A ~ fare|weather+Age+HouseholdSize, 
+             data = S) 
+summary(M9)
+AIC(M9) #1328.914
+#householdsize better than householdtype
+
+M10 <- mlogit(A ~ fare|weather+Age+HouseholdSize+Residential, 
+             data = S) 
+summary(M10)
+AIC(M10) #1324.68
+#not very significant compared to the rest of the variables so take out residential
+
+#add in income
+M11 <- mlogit(A ~ fare|weather+Age+HouseholdSize+Income, 
+              data = S) 
+summary(M11)
+AIC(M11) #1318.375
+#lowest AIC so far
+
+M12 <- mlogit(A ~ fare|weather+Age+HouseholdSize+Income+Cars, 
+              data = S) 
+summary(M12)
+AIC(M12) #1319.543
+#cars coeff not sig at all
+
+M13 <- mlogit(A ~ fare|weather+Age+HouseholdSize+Income+Concession, 
+              data = S) 
+summary(M13)
+
+AIC(M13) #1318.999
+#concession was not stated for SAAV though
+
+#now we try adding the other mode variables that we removed just now
+
+M14 <- mlogit(A ~ fare+wait|weather+Age+HouseholdSize+Income+Concession, 
+              data = S) 
+summary(M14)
+AIC(M14) #1319.172
+#not better than M11
+
+M15 <- mlogit(A ~ fare+wait+ivvt|weather+Age+HouseholdSize+Income+Concession, 
+              data = S) 
+summary(M15)
+AIC(M15) #1320.237
+#ivvt not sig at all and not better than M11
+
+M16 <- mlogit(A ~ fare+ivvt|weather+Age+HouseholdSize+Income+Concession, 
+              data = S) 
+summary(M16)
+AIC(M16) #1320.235
+#ivvt still not sig anw
+
+#conclusion: M11 is the best due to lowest AIC and highest proportion of significant coeffs
+
+# now we include person attributes too building upon M4
+
+M17 <- mlogit(A ~ fare+wait+ivvt|weather+Age, 
+             data = S) 
+summary(M17)
+AIC(M17) #1328.258
+
+M18 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender, 
+              data = S) 
+summary(M18)
+AIC(M18) #1330.134
+
+M19 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType, 
+              data = S) 
+summary(M19)
+AIC(M19) #1322.806
+
+M20 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+HouseholdSize, 
+              data = S) 
+summary(M20)
+AIC(M20) #1325.969
+
+M21 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdSize, 
+              data = S) 
+summary(M21)
+AIC(M21) #1332.142
+
+M22 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income, 
+              data = S) 
+summary(M22)
+AIC(M22) #1311.476
+
+M23 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars, 
+              data = S) 
+summary(M23)
+AIC(M23) #1308.912
+```
+
+
+### 4.4 Variable Selection
+
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|1    |$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M1), 3)`|
+|2    |$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M2), 3)`|
+|3    |$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M3), 3)`|
+|4    |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M4), 3)`|
+|5    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |            |            |            |            |`r round(calc.AIC(M5), 3)`|
+|6    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |`r round(calc.AIC(M6), 3)`|
+|7    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|            |            |            |            |`r round(calc.AIC(M7), 3)`|
+|8    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|$\checkmark$|            |            |            |`r round(calc.AIC(M8), 3)`|
+|9    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M9), 3)`|
+|10   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |`r round(calc.AIC(M10), 3)`|
+|**Model**|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|**AIC Value**|
+|11   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |            |`r round(calc.AIC(M11), 3)`|
+|12   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |`r round(calc.AIC(M12), 3)`|
+|13   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M13), 3)`|
+|14   |$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M14), 3)`|
+|15   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M15), 3)`|
+|16   |$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M16), 3)`|
+|17   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |            |            |            |`r round(calc.AIC(M17), 3)`|
+|18   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |`r round(calc.AIC(M18), 3)`|
+|19   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |`r round(calc.AIC(M19), 3)`|
+|20   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |`r round(calc.AIC(M20), 3)`|
+|21   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M21), 3)`|
+|22   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |`r round(calc.AIC(M22), 3)`|
+|23   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |`r round(calc.AIC(M23), 3)`|
+|**Model**|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|**AIC Value**|
 
 ### Blah Blah Blah
 
@@ -435,78 +606,80 @@ summary(M12)
 AIC(M12) #1319.543
 #cars coeff not sig at all
 
-M12 <- mlogit(A ~ fare|weather+Age+HouseholdSize+Income+Concession, 
+M13 <- mlogit(A ~ fare|weather+Age+HouseholdSize+Income+Concession, 
               data = S) 
-summary(M12)
+summary(M13)
 
-AIC(M12) #1318.999
+AIC(M13) #1318.999
 #concession was not stated for SAAV though
 
 #now we try adding the other mode variables that we removed just now
 
-M13 <- mlogit(A ~ fare+wait|weather+Age+HouseholdSize+Income+Concession, 
-              data = S) 
-summary(M13)
-AIC(M13) #1319.172
-#not better than M11
-
-M14 <- mlogit(A ~ fare+wait+ivvt|weather+Age+HouseholdSize+Income+Concession, 
+M14 <- mlogit(A ~ fare+wait|weather+Age+HouseholdSize+Income+Concession, 
               data = S) 
 summary(M14)
-AIC(M14) #1320.237
-#ivvt not sig at all and not better than M11
+AIC(M14) #1319.172
+#not better than M11
 
-M15 <- mlogit(A ~ fare+ivvt|weather+Age+HouseholdSize+Income+Concession, 
+M15 <- mlogit(A ~ fare+wait+ivvt|weather+Age+HouseholdSize+Income+Concession, 
               data = S) 
 summary(M15)
-AIC(M15) #1320.235
+AIC(M15) #1320.237
+#ivvt not sig at all and not better than M11
+
+M16 <- mlogit(A ~ fare+ivvt|weather+Age+HouseholdSize+Income+Concession, 
+              data = S) 
+summary(M16)
+AIC(M16) #1320.235
 #ivvt still not sig anw
 
 #conclusion: M11 is the best due to lowest AIC and highest proportion of significant coeffs
 
 # now we include person attributes too building upon M4
 
-M16 <- mlogit(A ~ fare+wait+ivvt|weather+Age, 
+M17 <- mlogit(A ~ fare+wait+ivvt|weather+Age, 
              data = S) 
-summary(M16)
-AIC(M16) #1328.258
-
-M17 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender, 
-              data = S) 
 summary(M17)
-AIC(M17) #1330.134
+AIC(M17) #1328.258
 
-M18 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType, 
+M18 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender, 
               data = S) 
 summary(M18)
-AIC(M18) #1322.806
+AIC(M18) #1330.134
 
-M19 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+HouseholdSize, 
+M19 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType, 
               data = S) 
 summary(M19)
-AIC(M19) #1325.969
+AIC(M19) #1322.806
 
-M20 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdSize, 
+M20 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+HouseholdSize, 
               data = S) 
 summary(M20)
-AIC(M20) #1332.142
+AIC(M20) #1325.969
 
-M21 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income, 
+M21 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdSize, 
               data = S) 
 summary(M21)
-AIC(M21) #1311.476
+AIC(M21) #1332.142
 
-M22 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars, 
+M22 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income, 
               data = S) 
 summary(M22)
-AIC(M22) #1308.912
+AIC(M22) #1311.476
 
-M23 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars+Concession, 
+M23 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars, 
               data = S) 
 summary(M23)
-AIC(M23) #1309.843
+AIC(M23) #1308.912
 
+# Cut here....
+M24 <- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars+Concession, 
+              data = S) 
+summary(M24)
+AIC(M24) #1309.843
+# Cut here....
 #conclusion: use M23 due to lowest AIC 
+# Use M23 actually.
 
 Likelihoodratio <- 1-(-650.87/(696*log(1/3)))
 Likelihoodratio

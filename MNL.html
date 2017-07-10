@@ -728,6 +728,47 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"></td>
 <td align="left">1335.254</td>
 </tr>
+</tbody>
+</table>
+<p>conclusion: M2 is the better model due to lower AIC, but if i were to include wait, i would take M4 due to how the p value when wait+ivvt is lower than in just wait. now we include person attributes too building upon M2</p>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="5%" />
+<col width="8%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Model</th>
+<th align="center"><code>weather</code></th>
+<th align="center"><code>fare</code></th>
+<th align="center"><code>wait</code></th>
+<th align="center"><code>ivtt</code></th>
+<th align="center"><code>access</code></th>
+<th align="center"><code>Age</code></th>
+<th align="center"><code>Gender</code></th>
+<th align="center"><code>Income</code></th>
+<th align="center"><code>HouseholdType</code></th>
+<th align="center"><code>HouseholdSize</code></th>
+<th align="center"><code>Residential</code></th>
+<th align="center"><code>Cars</code></th>
+<th align="center"><code>Concession</code></th>
+<th align="left">AIC Value</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
 <td align="center">5</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -831,40 +872,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="left">1324.68</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Model</strong></td>
-<td align="center"><code>weather</code></td>
-<td align="center"><code>fare</code></td>
-<td align="center"><code>wait</code></td>
-<td align="center"><code>ivtt</code></td>
-<td align="center"><code>access</code></td>
-<td align="center"><code>Age</code></td>
-<td align="center"><code>Gender</code></td>
-<td align="center"><code>Income</code></td>
-<td align="center"><code>HouseholdType</code></td>
-<td align="center"><code>HouseholdSize</code></td>
-<td align="center"><code>Residential</code></td>
-<td align="center"><code>Cars</code></td>
-<td align="center"><code>Concession</code></td>
-<td align="left"><strong>AIC Value</strong></td>
-</tr>
-<tr class="even">
-<td align="center">11</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1318.375</td>
-</tr>
-<tr class="odd">
 <td align="center">12</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -898,6 +905,47 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="left">1318.999</td>
 </tr>
+</tbody>
+</table>
+<p>concession was not stated for SAAV though. now we try adding the other mode variables that we removed just now</p>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="5%" />
+<col width="8%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Model</th>
+<th align="center"><code>weather</code></th>
+<th align="center"><code>fare</code></th>
+<th align="center"><code>wait</code></th>
+<th align="center"><code>ivtt</code></th>
+<th align="center"><code>access</code></th>
+<th align="center"><code>Age</code></th>
+<th align="center"><code>Gender</code></th>
+<th align="center"><code>Income</code></th>
+<th align="center"><code>HouseholdType</code></th>
+<th align="center"><code>HouseholdSize</code></th>
+<th align="center"><code>Residential</code></th>
+<th align="center"><code>Cars</code></th>
+<th align="center"><code>Concession</code></th>
+<th align="left">AIC Value</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
 <td align="center">14</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -949,7 +997,48 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="left">1320.235</td>
 </tr>
-<tr class="even">
+</tbody>
+</table>
+<p>conclusion: M11 is the best due to lowest AIC and highest proportion of significant coeffs. now we include person attributes too building upon M4</p>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="5%" />
+<col width="8%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Model</th>
+<th align="center"><code>weather</code></th>
+<th align="center"><code>fare</code></th>
+<th align="center"><code>wait</code></th>
+<th align="center"><code>ivtt</code></th>
+<th align="center"><code>access</code></th>
+<th align="center"><code>Age</code></th>
+<th align="center"><code>Gender</code></th>
+<th align="center"><code>Income</code></th>
+<th align="center"><code>HouseholdType</code></th>
+<th align="center"><code>HouseholdSize</code></th>
+<th align="center"><code>Residential</code></th>
+<th align="center"><code>Cars</code></th>
+<th align="center"><code>Concession</code></th>
+<th align="left">AIC Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td align="center">17</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -966,7 +1055,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"></td>
 <td align="left">1328.258</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="center">18</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -983,7 +1072,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"></td>
 <td align="left">1330.134</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center">19</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -1000,7 +1089,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"></td>
 <td align="left">1322.806</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="center">20</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -1017,7 +1106,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"></td>
 <td align="left">1325.969</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center">21</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -1034,7 +1123,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"></td>
 <td align="left">1332.142</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="center">22</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -1051,7 +1140,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"></td>
 <td align="left">1311.476</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center">23</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -1067,23 +1156,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"></td>
 <td align="left">1308.912</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>Model</strong></td>
-<td align="center"><code>weather</code></td>
-<td align="center"><code>fare</code></td>
-<td align="center"><code>wait</code></td>
-<td align="center"><code>ivtt</code></td>
-<td align="center"><code>access</code></td>
-<td align="center"><code>Age</code></td>
-<td align="center"><code>Gender</code></td>
-<td align="center"><code>Income</code></td>
-<td align="center"><code>HouseholdType</code></td>
-<td align="center"><code>HouseholdSize</code></td>
-<td align="center"><code>Residential</code></td>
-<td align="center"><code>Cars</code></td>
-<td align="center"><code>Concession</code></td>
-<td align="left"><strong>AIC Value</strong></td>
 </tr>
 </tbody>
 </table>

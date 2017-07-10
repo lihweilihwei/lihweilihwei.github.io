@@ -364,19 +364,32 @@ AIC(M23) #1308.912
 |2    |$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M2), 3)`|
 |3    |$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M3), 3)`|
 |4    |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M4), 3)`|
+
+conclusion: M2 is the better model due to lower AIC, but if i were to include wait, i would take M4 due to how the p value when wait+ivvt is lower than in just wait. now we include person attributes too building upon M2
+
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
 |5    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |            |            |            |            |`r round(calc.AIC(M5), 3)`|
 |6    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |`r round(calc.AIC(M6), 3)`|
 |7    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|            |            |            |            |`r round(calc.AIC(M7), 3)`|
 |8    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|$\checkmark$|            |            |            |`r round(calc.AIC(M8), 3)`|
 |9    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M9), 3)`|
 |10   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |`r round(calc.AIC(M10), 3)`|
-|**Model**|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|**AIC Value**|
-|11   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |            |`r round(calc.AIC(M11), 3)`|
 |12   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |`r round(calc.AIC(M12), 3)`|
 |13   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M13), 3)`|
+
+concession was not stated for SAAV though. now we try adding the other mode variables that we removed just now
+
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
 |14   |$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M14), 3)`|
 |15   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M15), 3)`|
 |16   |$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M16), 3)`|
+
+conclusion: M11 is the best due to lowest AIC and highest proportion of significant coeffs. now we include person attributes too building upon M4
+
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
 |17   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |            |            |            |`r round(calc.AIC(M17), 3)`|
 |18   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |`r round(calc.AIC(M18), 3)`|
 |19   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |`r round(calc.AIC(M19), 3)`|
@@ -384,7 +397,7 @@ AIC(M23) #1308.912
 |21   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M21), 3)`|
 |22   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |`r round(calc.AIC(M22), 3)`|
 |23   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |`r round(calc.AIC(M23), 3)`|
-|**Model**|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|**AIC Value**|
+
 
 ### Blah Blah Blah
 

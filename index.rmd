@@ -1,6 +1,5 @@
 ---
 title: ""
-runtime: shiny
 output: 
   html_document:
       theme: readable

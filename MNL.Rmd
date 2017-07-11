@@ -2,6 +2,9 @@
 title: "Multinomial Logit Model (MNL)"
 output: 
   html_document:
+      toc: true
+      toc_float: true
+      toc_depth: 4
       theme: readable
   
 ---
@@ -10,13 +13,13 @@ output:
 
 <br></br>
 
-### 1 Introduction
+## 1 Introduction
 
 This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>. Multinomial Logistic Regression serves to predict an individual's mode choice (public bus, shared bicycles/PMDs, or SAAVs) using inputs such as the individual's demographics, mode specific variables and non-mode specific variables.
 
 <br></br>
 
-### 2 The Data
+## 2 The Data
 
 First, we read in the data from the stated preference survey which is in the CSV format (Comma Separated Values).
 
@@ -34,7 +37,7 @@ str(modechoice)
 
 <hr>
 
-### 3.1 Predicting "NA" Incomes with Linear Regression
+## 3 Predicting "NA" Incomes with Linear Regression
 
 Some of the entries in the `Income` column are `NA`. To fill this missing information, we used linear regression to predict their values.
 
@@ -49,7 +52,7 @@ There are `r dim(incomenotNA)[1]` observations with stated incomes and `r dim(in
 
 <br></br>
 
-### 3.2 Creating Training and Test Sets
+#### 3.1 Creating Training and Test Sets
 
 We now create training and test sets from the observations where incomes are stated (`incomenotNA`). The `caTools` package is used.
 
@@ -69,7 +72,7 @@ incometest <- subset(incomenotNA,split==FALSE)
 
 <br></br>
 
-### 3.3 Creating a Linear Regression Model
+#### 3.2 Creating a Linear Regression Model
 
 We now create a linear regression. The first model includes all demographic information of the individual:
 
@@ -97,7 +100,7 @@ The model has an adjusted $R^2$ value of `r round(summary(income.model1)$adj.r.s
 
 <br></br>
 
-### 3.4 Removing `HouseholdType` and `Residential`
+#### 3.3 Removing `HouseholdType` and `Residential`
 
 We remove the insignificant variables from the model.
 
@@ -112,7 +115,7 @@ This model has an increased adjusted $R^2$ value of `r round(summary(income.mode
 
 <br></br>
 
-### 3.5 Variable Selection
+#### 3.4 Variable Selection
 
 Several other combinations of variables were tested. The combination of variables which gave the highest adjusted $R^2$ was chosen.
 
@@ -172,13 +175,17 @@ modechoice$Income <- ifelse(is.na(modechoice$Income),
                             modechoice$Income)
 ```
 
-Now that all entries in the dataset have no `NA` values, we can proceed to conduct Multinomial Logistic Regression.
-
 <br></br>
 
 <hr>
 
-### 4.1 Generating Training and Test Sets
+## 4 Fitting the MNL model
+
+Now that all entries in the dataset have no `NA` values, we can proceed to conduct Multinomial Logistic Regression.
+
+<br></br>
+
+#### 4.1 Generating Training and Test Sets
 
 Each row in the dataset corresponds to a choice task of a particular individual. We want to randomly split the individuals into the training or test set, while keeping all 8 choice tasks intact.
 
@@ -202,7 +209,7 @@ kable(modechoice.training[1:16,2:6])
 
 <br></br>
 
-### 4.2 Creating an `mlogit()` Object
+#### 4.2 Creating an `mlogit()` Object
 
 We use the `mlogit` package which will help us conduct Multinomial Logistic Regression.
 
@@ -222,7 +229,7 @@ S <- mlogit.data(modechoice.training,
 
 <br></br>
 
-### 4.3 Calculating AIC
+#### 4.3 Calculating AIC
 
 The Akaike Information Criterion (AIC) is.... a lower AIC value is better. The formula is given by:
 
@@ -382,7 +389,7 @@ AIC(M23) #1308.912
 
 <br></br>
 
-### 4.4 Variable Selection
+#### 4.4 Variable Selection
 
 |Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
@@ -428,7 +435,7 @@ Overall, Model 23 is the best model with the lowest AIC value.
 
 <br></br>
 
-### 4.5 Predicting Mode Choice
+#### 4.5 Predicting Mode Choice
 
 We use the `predict()` function to give the probability of an individual choosing a particular mode.
 
@@ -459,7 +466,7 @@ The diagonal entries of the confusion matrix are the instances where the model c
 
 <hr>
 
-### Blah Blah Blah
+**Blah Blah Blah**
 
 ```{r eval=FALSE}
 library(mlogit)

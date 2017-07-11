@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
@@ -162,6 +165,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -211,13 +309,13 @@ $(document).ready(function () {
 
 <hr>
 <p><br></br></p>
-<div id="introduction" class="section level3">
-<h3>1 Introduction</h3>
+<div id="introduction" class="section level2">
+<h2>1 Introduction</h2>
 <p>This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>. Multinomial Logistic Regression serves to predict an individual’s mode choice (public bus, shared bicycles/PMDs, or SAAVs) using inputs such as the individual’s demographics, mode specific variables and non-mode specific variables.</p>
 <p><br></br></p>
 </div>
-<div id="the-data" class="section level3">
-<h3>2 The Data</h3>
+<div id="the-data" class="section level2">
+<h2>2 The Data</h2>
 <p>First, we read in the data from the stated preference survey which is in the CSV format (Comma Separated Values).</p>
 <pre class="r"><code>modechoice &lt;- read.csv(&quot;ModeChoice.csv&quot;)</code></pre>
 <p>Looking at the structure of the dataset <code>str()</code>, it contains 1000 observations of 40 variables.</p>
@@ -225,17 +323,16 @@ $(document).ready(function () {
 <p><br></br></p>
 <hr>
 </div>
-<div id="predicting-na-incomes-with-linear-regression" class="section level3">
-<h3>3.1 Predicting “NA” Incomes with Linear Regression</h3>
+<div id="predicting-na-incomes-with-linear-regression" class="section level2">
+<h2>3 Predicting “NA” Incomes with Linear Regression</h2>
 <p>Some of the entries in the <code>Income</code> column are <code>NA</code>. To fill this missing information, we used linear regression to predict their values.</p>
 <p>We separate the dataset into two: one with stated incomes, and another which have <code>NA</code> for <code>Income</code>.</p>
 <pre class="r"><code>incomenotNA &lt;- subset(modechoice, modechoice$Income != &quot;NA&quot;)
 incomeNA &lt;- subset(modechoice,is.na(modechoice$Income))</code></pre>
 <p>There are 752 observations with stated incomes and 248 observations where income is <code>NA</code>.</p>
 <p><br></br></p>
-</div>
-<div id="creating-training-and-test-sets" class="section level3">
-<h3>3.2 Creating Training and Test Sets</h3>
+<div id="creating-training-and-test-sets" class="section level4">
+<h4>3.1 Creating Training and Test Sets</h4>
 <p>We now create training and test sets from the observations where incomes are stated (<code>incomenotNA</code>). The <code>caTools</code> package is used.</p>
 <pre class="r"><code>library(caTools)</code></pre>
 <p>We set the random seed so that the results will be replicable. The training and test sets are obtained with a 65/35 split ratio.</p>
@@ -246,8 +343,8 @@ incometraining &lt;- subset(incomenotNA,split==TRUE)
 incometest &lt;- subset(incomenotNA,split==FALSE)</code></pre>
 <p><br></br></p>
 </div>
-<div id="creating-a-linear-regression-model" class="section level3">
-<h3>3.3 Creating a Linear Regression Model</h3>
+<div id="creating-a-linear-regression-model" class="section level4">
+<h4>3.2 Creating a Linear Regression Model</h4>
 <p>We now create a linear regression. The first model includes all demographic information of the individual:</p>
 <table>
 <thead>
@@ -321,8 +418,8 @@ summary(income.model1)</code></pre>
 <p>The model has an adjusted <span class="math inline">\(R^2\)</span> value of 0.39682. <code>HouseholdType</code> and <code>Residential</code> are not significant at the 90% significance level.</p>
 <p><br></br></p>
 </div>
-<div id="removing-householdtype-and-residential" class="section level3">
-<h3>3.4 Removing <code>HouseholdType</code> and <code>Residential</code></h3>
+<div id="removing-householdtype-and-residential" class="section level4">
+<h4>3.3 Removing <code>HouseholdType</code> and <code>Residential</code></h4>
 <p>We remove the insignificant variables from the model.</p>
 <pre class="r"><code>income.model2 &lt;- lm(Income ~ Age + Gender +HouseholdSize + Cars + Concession,
                     data=incometraining)
@@ -354,8 +451,8 @@ summary(income.model2)</code></pre>
 <p>This model has an increased adjusted <span class="math inline">\(R^2\)</span> value of 0.39911. <code>Concession</code> and <code>(Intercept)</code> are the least significant variables.</p>
 <p><br></br></p>
 </div>
-<div id="variable-selection" class="section level3">
-<h3>3.5 Variable Selection</h3>
+<div id="variable-selection" class="section level4">
+<h4>3.4 Variable Selection</h4>
 <p>Several other combinations of variables were tested. The combination of variables which gave the highest adjusted <span class="math inline">\(R^2\)</span> was chosen.</p>
 <table style="width:90%;">
 <colgroup>
@@ -452,12 +549,16 @@ sst &lt;- sum((incometest$Income-mean(incometraining$Income))^2)</code></pre>
 modechoice$Income &lt;- ifelse(is.na(modechoice$Income),
                             NAincomeprediction,
                             modechoice$Income)</code></pre>
-<p>Now that all entries in the dataset have no <code>NA</code> values, we can proceed to conduct Multinomial Logistic Regression.</p>
 <p><br></br></p>
 <hr>
 </div>
-<div id="generating-training-and-test-sets" class="section level3">
-<h3>4.1 Generating Training and Test Sets</h3>
+</div>
+<div id="fitting-the-mnl-model" class="section level2">
+<h2>4 Fitting the MNL model</h2>
+<p>Now that all entries in the dataset have no <code>NA</code> values, we can proceed to conduct Multinomial Logistic Regression.</p>
+<p><br></br></p>
+<div id="generating-training-and-test-sets" class="section level4">
+<h4>4.1 Generating Training and Test Sets</h4>
 <p>Each row in the dataset corresponds to a choice task of a particular individual. We want to randomly split the individuals into the training or test set, while keeping all 8 choice tasks intact.</p>
 <pre class="r"><code>set.seed(0)
 mask = rep(x = sample.split(rep(1, 125), SplitRatio = 0.7),
@@ -610,8 +711,8 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </table>
 <p><br></br></p>
 </div>
-<div id="creating-an-mlogit-object" class="section level3">
-<h3>4.2 Creating an <code>mlogit()</code> Object</h3>
+<div id="creating-an-mlogit-object" class="section level4">
+<h4>4.2 Creating an <code>mlogit()</code> Object</h4>
 <p>We use the <code>mlogit</code> package which will help us conduct Multinomial Logistic Regression.</p>
 <pre class="r"><code>library(mlogit)</code></pre>
 <pre class="r"><code>S &lt;- mlogit.data(modechoice.training,
@@ -623,8 +724,8 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
                  id.var=&quot;Case&quot;)</code></pre>
 <p><br></br></p>
 </div>
-<div id="calculating-aic" class="section level3">
-<h3>4.3 Calculating AIC</h3>
+<div id="calculating-aic" class="section level4">
+<h4>4.3 Calculating AIC</h4>
 <p>The Akaike Information Criterion (AIC) is…. a lower AIC value is better. The formula is given by:</p>
 <p><span class="math display">\[AIC = -2 LL(\hat\beta) + 2|\hat\beta|\]</span></p>
 <p>where <span class="math inline">\(LL(\hat\beta)\)</span> is the Log-likelihood of the estimated model and <span class="math inline">\(|\hat\beta|\)</span> is the number of coefficients to be estimated (including the intercept).</p>
@@ -634,8 +735,8 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 }</code></pre>
 <p><br></br></p>
 </div>
-<div id="variable-selection-1" class="section level3">
-<h3>4.4 Variable Selection</h3>
+<div id="variable-selection-1" class="section level4">
+<h4>4.4 Variable Selection</h4>
 <table>
 <colgroup>
 <col width="5%" />
@@ -1176,8 +1277,8 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <p>Overall, Model 23 is the best model with the lowest AIC value.</p>
 <p><br></br></p>
 </div>
-<div id="predicting-mode-choice" class="section level3">
-<h3>4.5 Predicting Mode Choice</h3>
+<div id="predicting-mode-choice" class="section level4">
+<h4>4.5 Predicting Mode Choice</h4>
 <p>We use the <code>predict()</code> function to give the probability of an individual choosing a particular mode.</p>
 <pre class="r"><code>P &lt;- predict(M23, newdata = S, type = &quot;response&quot;)
 P[1,]</code></pre>
@@ -1198,9 +1299,7 @@ table(PredictedChoice, ActualChoice)</code></pre>
 <p>The diagonal entries of the confusion matrix are the instances where the model correctly predicts the actual choice of the individual. Accuracy is calculated by finding the proportion of instances where the model correctly predicted the actual choice. This model has an accuracy of 56.32%.</p>
 <p><br></br></p>
 <hr>
-</div>
-<div id="blah-blah-blah" class="section level3">
-<h3>Blah Blah Blah</h3>
+<p><strong>Blah Blah Blah</strong></p>
 <pre class="r"><code>library(mlogit)
 library(caTools)
 
@@ -1534,9 +1633,12 @@ predict(M23, newdata = sample_data, type=&quot;response&quot;)
 
 #M23$coefficients[&quot;A.saav:Age&quot;]</code></pre>
 </div>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 

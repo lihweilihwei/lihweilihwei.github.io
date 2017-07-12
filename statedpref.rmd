@@ -11,7 +11,7 @@ The stated preference survey was conducted with three aims:
 
 1. To ascertain the importance of attributes that significantly affect the mode choice of commuters.
 
-2. To determine how well the SAAV might be received by the future residents of GSW.
+2. To determine how well the Dalphin might be received by the future residents of GSW.
 
 3. To determine mode choice by carrying out Multinomial Logistic Regression (MNL).
 

@@ -311,7 +311,7 @@ div.tocify {
 <p><br></br></p>
 <div id="introduction" class="section level2">
 <h2>1 Introduction</h2>
-<p>This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>. Multinomial Logistic Regression serves to predict an individual’s mode choice (public bus, shared bicycles/PMDs, or SAAVs) using inputs such as the individual’s demographics, mode specific variables and non-mode specific variables.</p>
+<p>This document elaborates on the steps done to run Multinomial Logistic Regression on the results of the <a href="statedpref.html">Stated Preference Survey</a>. Multinomial Logistic Regression serves to predict an individual’s mode choice (public bus, shared bicycles/PMDs, or Dalphin) using inputs such as the individual’s demographics, mode specific variables and non-mode specific variables.</p>
 <p><br></br></p>
 </div>
 <div id="the-data" class="section level2">
@@ -720,7 +720,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
                  choice=&quot;A&quot;,
                  varying=c(4:18),
                  sep=&quot;&quot;,
-                 alt.levels=c(&quot;A.bus&quot;,&quot;A.cyclingPMD&quot;,&quot;A.saav&quot;),
+                 alt.levels=c(&quot;A.bus&quot;,&quot;A.cyclingPMD&quot;,&quot;A.dalphin&quot;),
                  id.var=&quot;Case&quot;)</code></pre>
 <p><br></br></p>
 </div>
@@ -1280,358 +1280,75 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <div id="predicting-mode-choice" class="section level4">
 <h4>4.5 Predicting Mode Choice</h4>
 <p>We use the <code>predict()</code> function to give the probability of an individual choosing a particular mode.</p>
-<pre class="r"><code>P &lt;- predict(M23, newdata = S, type = &quot;response&quot;)
-P[1,]</code></pre>
-<pre><code>##        A.bus A.cyclingPMD       A.saav 
-##    0.2783367    0.6137458    0.1079175</code></pre>
-<p>For example, the individual corresponding to the first row will choose the bus with a 27.8% chance, Shared Bicycles/PMDs with a 61.4% chance, and the SAAV with a 10.8% chance.</p>
+<pre class="r"><code>P &lt;- predict(M23, newdata = S, type = &quot;response&quot;)</code></pre>
+<p>Looking at the first three rows of the dataset:</p>
+<pre class="r"><code>kable(P[1:3,], align = &#39;c&#39;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Bus</th>
+<th align="center">Shared Bicycles/PMDs</th>
+<th align="center">Dalphin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.278</td>
+<td align="center">0.614</td>
+<td align="center">0.108</td>
+</tr>
+<tr class="even">
+<td align="center">0.265</td>
+<td align="center">0.584</td>
+<td align="center">0.151</td>
+</tr>
+<tr class="odd">
+<td align="center">0.232</td>
+<td align="center">0.511</td>
+<td align="center">0.257</td>
+</tr>
+</tbody>
+</table>
+<p>For example, the individual corresponding to the first row will choose the bus with a 27.8% chance, Shared Bicycles/PMDs with a 61.4% chance, and the Dalphin with a 10.8% chance.</p>
 <p>We let the predicted choice to be the most likely alternative (highest chance of being chosen).</p>
-<pre class="r"><code>PredictedChoice &lt;- apply(P,1,which.max)</code></pre>
+<pre class="r"><code>PredictedChoice &lt;- apply(P, 1, which.max)</code></pre>
 <p>Using a confusion matrix, we compare the actual choice in the training set with the predicted choice by the model.</p>
-<pre class="r"><code>ActualChoice &lt;- modechoice.training$A
-
-table(PredictedChoice, ActualChoice)</code></pre>
-<pre><code>##                ActualChoice
-## PredictedChoice A.bus A.cyclingPMD A.saav
-##               1    68           19     46
-##               2    26           42     17
-##               3   132           64    282</code></pre>
+<pre class="r"><code>ActualChoice &lt;- modechoice.training$A</code></pre>
+<p><strong>Predicted Choice vs. Actual Choice</strong></p>
+<pre class="r"><code>kable(table(PredictedChoice, ActualChoice))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Bus</th>
+<th align="right">Shared Bicycles/PMDs</th>
+<th align="right">Dalphin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bus</td>
+<td align="right">68</td>
+<td align="right">19</td>
+<td align="right">46</td>
+</tr>
+<tr class="even">
+<td>Shared Bicycles/PMDs</td>
+<td align="right">26</td>
+<td align="right">42</td>
+<td align="right">17</td>
+</tr>
+<tr class="odd">
+<td>Dalphin</td>
+<td align="right">132</td>
+<td align="right">64</td>
+<td align="right">282</td>
+</tr>
+</tbody>
+</table>
 <p>The diagonal entries of the confusion matrix are the instances where the model correctly predicts the actual choice of the individual. Accuracy is calculated by finding the proportion of instances where the model correctly predicted the actual choice. This model has an accuracy of 56.32%.</p>
 <p><br></br></p>
 <hr>
-<p><strong>Blah Blah Blah</strong></p>
-<pre class="r"><code>library(mlogit)
-library(caTools)
-
-
-#    MODE CHOICE STATED PREFERENCE SURVEY
-
-# The Data ==============================================================
-
-
-hist(modechoice$Age)
-
-withSAAV &lt;- modechoice[,c(1:21,25:39)]
-noSAAV &lt;- modechoice[,c(1:17,22:39)]
-
-#install.packages(&quot;mlogit&quot;)
-library(mlogit)
-
-# Estimating income for refused / unknown using linear regression ============
-  
-incomenotNA &lt;- subset(modechoice, modechoice$Income != &quot;NA&quot;)
-str(incomenotNA)
-incomeNA &lt;- subset(modechoice,is.na(modechoice$Income))
-str(incomeNA)
-
-#install.packages(&quot;caTools&quot;)
-
-set.seed(1)
-split &lt;- sample.split(incomenotNA$Age, SplitRatio = 0.65)
-#splits dataset into .65 and .35 with proportion of TENCHD in each being same as it was in framing1
-
-incometraining &lt;- subset(incomenotNA,split==TRUE)
-incometest &lt;- subset(incomenotNA,split==FALSE)
-str(incometraining) #larger set
-str(incometest) #smaller set
-
-#summary(step(income.model1))
-
-income.model1 &lt;- lm(Income ~ Age + Gender + HouseholdType + 
-                      HouseholdSize + Residential + Cars + 
-                      Concession,
-                    data=incometraining)
-
-summary(income.model1)
-
-#Adjusted R-squared:  0.3968
-#but household type and residential not sig at all
-
-#take out hsehold type and residential
-income.model2 &lt;- lm(Income ~ Age + Gender +HouseholdSize + Cars + Concession,
-                    data=incometraining)
-
-summary(income.model2)
-#Adjusted R-squared:  0.3991 
-#least sig is int and concession
-
-#without concession
-income.model3 &lt;- lm(Income ~ Age + Gender +HouseholdSize + Cars,
-                    data=incometraining)
-
-summary(income.model3)
-#Adjusted R-squared:  0.3955
-
-#add back concession, and household type
-income.model4 &lt;- lm(Income ~ Age + Gender +HouseholdSize + Cars + Concession + HouseholdType,
-                    data=incometraining)
-
-summary(income.model4)
-#Adjusted R-squared:  0.3979 
-
-cor(modechoice$Residential,modechoice$HouseholdType)
-
-#add back concession, and household type
-income.model5 &lt;- lm(Income ~ Age + Gender +HouseholdSize + Cars + Concession + Residential,
-                    data=incometraining)
-
-summary(income.model5)
-#Adjusted R-squared:  0.398 
-
-
-plot(incomeprediction, jitter(incometest$Income, 1),
-     cex = 0.5,
-     xlim = c(1,5),
-     ylim = c(1, 5))
-
-abline(a=0, b=1)
-
-incomeprediction &lt;- predict(income.model2, newdata=incometest)
-sse &lt;- sum((incomeprediction-incometest$Income)^2)
-#sse is the sum of square of difference between the true value and the estimated value
-
-sst &lt;- sum((incometest$Income-mean(incometraining$Income))^2)
-
-#sst is the sum of square of diff between the true value and the mean of the true values
-1-sse/sst
-#this is the R^2
-#0.3740837
-
-
-#cor(modechoice)
-# Generating training and test sets ===========================================
-library(caTools)
-
-set.seed(0)
-
-mask = rep(x = sample.split(rep(1, 125), SplitRatio = 0.7),
-           each = 8)
-
-modechoice.training = subset(modechoice, mask==TRUE)
-
-modechoice.test = subset(modechoice, mask==FALSE)
-
-# ============================================================================
-
-which(colnames(modechoice.training)==&quot;weather1&quot;) #4
-which(colnames(modechoice.training)==&quot;fare3&quot;) #18
-#columns 4 to 17 contains attributes for the 3 alternatives
-
-# Checking the distribution of stated choices in the training and test sets:
-plot(modechoice.training$A)
-plot(modechoice.test$A)
-plot(modechoice$A)
-
-
-# Creating an mlogit object ==================================================
-
-S &lt;- mlogit.data(modechoice.training,
-                 shape=&quot;wide&quot;,
-                 choice=&quot;A&quot;,
-                 varying=c(4:18),
-                 sep=&quot;&quot;,
-                 alt.levels=c(&quot;A.bus&quot;,&quot;A.cyclingPMD&quot;,&quot;A.saav&quot;),
-                 id.var=&quot;Case&quot;)
-
-summary(S)
-
-# This function takes in a model and outputs the AIC value =====================
-# AIC = -2*Loglikelihood + 2*(num.params+intercept)
-# Lower AIC is better
-
-calc.AIC &lt;- function (model) {
-  return(-2*model$logLik[1] + 2*length(model$coefficients))
-}
-
-#mode related variables
-
-M1 &lt;- mlogit(A ~ 1|weather,data=S)
-summary(M1)
-AIC(M1) #1357.116
-
-M2 &lt;- mlogit(A ~ fare|weather, 
-            data = S) 
-summary(M2)
-AIC(M2) #1333.944
-
-M3 &lt;- mlogit(A ~ fare+wait|weather, 
-             data = S) 
-summary(M3)
-AIC(M3) #1334.169 but mcfadden rsq increased slightly
-
-M4 &lt;- mlogit(A ~ fare+wait+ivvt|weather, 
-             data = S) 
-summary(M4)
-AIC(M4) #1335.254 but mcfadden rsq increased slightly
-
-#conclusion: M2 is the better model due to lower AIC, but if i were to include wait, i would take M4 due to how the p value when wait+ivvt is lower than in just wait
-
-# now we include person attributes too building upon M2
-
-M5 &lt;- mlogit(A ~ fare|weather+Age, 
-             data = S) 
-summary(M5)
-AIC(M5) #1326.97 
-#age sig for cycling
-
-M6 &lt;- mlogit(A ~ fare|weather+Age+Gender, 
-             data = S) 
-summary(M6)
-AIC(M6) #1328.847 
-#AIC increased so gender is not to be added
-
-M7 &lt;- mlogit(A ~ fare|weather+Age+HouseholdType, 
-             data = S) 
-summary(M7)
-AIC(M7) #1320.019
-#lowest AIC so far
-
-M8 &lt;- mlogit(A ~ fare|weather+Age+HouseholdType+HouseholdSize, 
-             data = S) 
-summary(M8)
-AIC(M8) #1323.093
-#either householdtype or householdsize should stay
-
-M9 &lt;- mlogit(A ~ fare|weather+Age+HouseholdSize, 
-             data = S) 
-summary(M9)
-AIC(M9) #1328.914
-#householdsize better than householdtype
-
-M10 &lt;- mlogit(A ~ fare|weather+Age+HouseholdSize+Residential, 
-             data = S) 
-summary(M10)
-AIC(M10) #1324.68
-#not very significant compared to the rest of the variables so take out residential
-
-#add in income
-M11 &lt;- mlogit(A ~ fare|weather+Age+HouseholdSize+Income, 
-              data = S) 
-summary(M11)
-AIC(M11) #1318.375
-#lowest AIC so far
-
-M12 &lt;- mlogit(A ~ fare|weather+Age+HouseholdSize+Income+Cars, 
-              data = S) 
-summary(M12)
-AIC(M12) #1319.543
-#cars coeff not sig at all
-
-M13 &lt;- mlogit(A ~ fare|weather+Age+HouseholdSize+Income+Concession, 
-              data = S) 
-summary(M13)
-
-AIC(M13) #1318.999
-#concession was not stated for SAAV though
-
-#now we try adding the other mode variables that we removed just now
-
-M14 &lt;- mlogit(A ~ fare+wait|weather+Age+HouseholdSize+Income+Concession, 
-              data = S) 
-summary(M14)
-AIC(M14) #1319.172
-#not better than M11
-
-M15 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+HouseholdSize+Income+Concession, 
-              data = S) 
-summary(M15)
-AIC(M15) #1320.237
-#ivvt not sig at all and not better than M11
-
-M16 &lt;- mlogit(A ~ fare+ivvt|weather+Age+HouseholdSize+Income+Concession, 
-              data = S) 
-summary(M16)
-AIC(M16) #1320.235
-#ivvt still not sig anw
-
-#conclusion: M11 is the best due to lowest AIC and highest proportion of significant coeffs
-
-# now we include person attributes too building upon M4
-
-M17 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age, 
-             data = S) 
-summary(M17)
-AIC(M17) #1328.258
-
-M18 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender, 
-              data = S) 
-summary(M18)
-AIC(M18) #1330.134
-
-M19 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType, 
-              data = S) 
-summary(M19)
-AIC(M19) #1322.806
-
-M20 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+HouseholdSize, 
-              data = S) 
-summary(M20)
-AIC(M20) #1325.969
-
-M21 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdSize, 
-              data = S) 
-summary(M21)
-AIC(M21) #1332.142
-
-M22 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income, 
-              data = S) 
-summary(M22)
-AIC(M22) #1311.476
-
-M23 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars, 
-              data = S) 
-summary(M23)
-AIC(M23) #1308.912
-
-# Cut here....
-M24 &lt;- mlogit(A ~ fare+wait+ivvt|weather+Age+Gender+HouseholdType+Income+Cars+Concession, 
-              data = S) 
-summary(M24)
-AIC(M24) #1309.843
-# Cut here....
-#conclusion: use M23 due to lowest AIC 
-# Use M23 actually.
-
-Likelihoodratio &lt;- 1-(-650.87/(696*log(1/3)))
-Likelihoodratio
-
-P &lt;- predict(M23,newdata=S)
-P
-length(P)
-
-PredictedChoice &lt;- apply(P,1,which.max)
-PredictedChoice
-length(PredictedChoice)
-
-ActualChoice &lt;- modechoice.training$A
-length(ActualChoice)
-
-table(PredictedChoice, ActualChoice)
-Accuracy11 &lt;- (58+40+291)/696
-Accuracy11
-
-Accuracy23 &lt;- (63+43+278)/696 
-Accuracy23
-
-Accuracy22&lt;- (68+42+282)/696
-Accuracy22
-
-#highest accuracy 0.5632184
-
-# A McFadden&#39;s pseudo R-squared ranging from 0.2 to 0.4 indicates very good model fit.
-
-cor(modechoice[,33:40])
-
-save(M23, file=&quot;M23.rda&quot;)
-sample_data = S[1:3,]
-save(sample_data, file = &quot;sample_data.rData&quot;)
-
-topredict = S[1:3,]
-#topredict = S[1:3,c(4, 18:20, 23:25, 26:31)]
-
-predict(M23, newdata = sample_data, type=&quot;response&quot;)
-
-#M23$coefficients[&quot;A.saav:Age&quot;]</code></pre>
 </div>
 </div>
 

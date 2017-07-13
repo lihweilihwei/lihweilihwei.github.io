@@ -8,6 +8,8 @@ output:
 
 ### <a href="https://lihweilihwei.shinyapps.io/probabilitiesapp/" target="_blank">Probability of Choosing a Mode</a>
 
+[![Probability of Choosing a Mode](ProbabilitiesApp.png)](https://lihweilihwei.shinyapps.io/probabilitiesapp/)
+
 Using the trained MNL model with the responses from the Stated Preferences Survey, we can predict the probability of an individual choosing a particular mode (Bus, Shared Bicycles/PMDs, or the Dalphin). See how changing the attributes influences the mode choice!  
 
 

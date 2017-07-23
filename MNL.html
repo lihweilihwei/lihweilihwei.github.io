@@ -559,7 +559,7 @@ modechoice$Income &lt;- ifelse(is.na(modechoice$Income),
 <p><br></br></p>
 <div id="generating-training-and-test-sets" class="section level4">
 <h4>4.1 Generating Training and Test Sets</h4>
-<p>Each row in the dataset corresponds to a choice task of a particular individual. We want to randomly split the individuals into the training or test set, while keeping all 8 choice tasks intact.</p>
+<p>Each row in the dataset corresponds to a choice task of a particular individual. We randomly split the 125 individuals into the training or test set with a 70:30 ratio, while keeping all 8 choice tasks intact.</p>
 <pre class="r"><code>set.seed(0)
 mask = rep(x = sample.split(rep(1, 125), SplitRatio = 0.7),
            each = 8)
@@ -715,18 +715,24 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <h4>4.2 Creating an <code>mlogit()</code> Object</h4>
 <p>We use the <code>mlogit</code> package which will help us conduct Multinomial Logistic Regression.</p>
 <pre class="r"><code>library(mlogit)</code></pre>
-<pre class="r"><code>S &lt;- mlogit.data(modechoice.training,
+<pre class="r"><code>S &lt;- mlogit.data(data = modechoice.training,
                  shape=&quot;wide&quot;,
                  choice=&quot;A&quot;,
                  varying=c(4:18),
                  sep=&quot;&quot;,
                  alt.levels=c(&quot;A.bus&quot;,&quot;A.cyclingPMD&quot;,&quot;A.dalphin&quot;),
                  id.var=&quot;Case&quot;)</code></pre>
+<p>The <code>mlogit.data()</code> function shapes the data into a suitable form for the use of the <code>mlogit()</code> function. There are several parameters to be defined in this function:</p>
+<ul>
+<li><p><code>data</code> specifies the dataset to be used. Here, we use the training set created previously.</p></li>
+<li><p><code>varying</code> refers to the columns that correspond to the attributes of the choice.</p></li>
+<li><p><code>alt.levels</code> specifies a list of the choices available (Public bus, Cycling/PMDs, or Dalphin).</p></li>
+</ul>
 <p><br></br></p>
 </div>
 <div id="calculating-aic" class="section level4">
 <h4>4.3 Calculating AIC</h4>
-<p>The Akaike Information Criterion (AIC) is…. a lower AIC value is better. The formula is given by:</p>
+<p>The Akaike Information Criterion (AIC) is a measure of the quality of fit of a model which also takes model complexity into account. A lower AIC value is more desirable. The formula is given by:</p>
 <p><span class="math display">\[AIC = -2 LL(\hat\beta) + 2|\hat\beta|\]</span></p>
 <p>where <span class="math inline">\(LL(\hat\beta)\)</span> is the Log-likelihood of the estimated model and <span class="math inline">\(|\hat\beta|\)</span> is the number of coefficients to be estimated (including the intercept).</p>
 <p>For convenience, we define a function <code>calc.AIC()</code> that takes in a model and returns its AIC value.</p>
@@ -737,6 +743,12 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </div>
 <div id="variable-selection-1" class="section level4">
 <h4>4.4 Variable Selection</h4>
+<p>There are three broad types of variable selection:</p>
+<ul>
+<li><p>Forward: Add one variable at a time. Remove this variable if it is not significant. If significant, add another variable.</p></li>
+<li><p>Backward: Add all variables into model. Remove least significant variable each time.</p></li>
+<li><p>Stepwise: Combination of the forward and backward selection techniques. After each step in which a variable was added, all variables in the model are checked to see if their significance has been reduced below the threshold significance level. If a nonsignificant variable is found, it is removed from the model. A variable can be added or removed from the previous model.</p></li>
+</ul>
 <table>
 <colgroup>
 <col width="5%" />

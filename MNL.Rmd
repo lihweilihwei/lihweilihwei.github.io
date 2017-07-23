@@ -187,7 +187,7 @@ Now that all entries in the dataset have no `NA` values, we can proceed to condu
 
 #### 4.1 Generating Training and Test Sets
 
-Each row in the dataset corresponds to a choice task of a particular individual. We want to randomly split the individuals into the training or test set, while keeping all 8 choice tasks intact.
+Each row in the dataset corresponds to a choice task of a particular individual. We  randomly split the 125 individuals into the training or test set with a 70:30 ratio, while keeping all 8 choice tasks intact.
 
 ```{r}
 set.seed(0)
@@ -218,7 +218,7 @@ library(mlogit)
 ```
 
 ```{r eval=FALSE}
-S <- mlogit.data(modechoice.training,
+S <- mlogit.data(data = modechoice.training,
                  shape="wide",
                  choice="A",
                  varying=c(4:18),
@@ -228,7 +228,7 @@ S <- mlogit.data(modechoice.training,
 ```
 
 ```{r echo=FALSE, result='hide'}
-S <- mlogit.data(modechoice.training,
+S <- mlogit.data(data = modechoice.training,
                  shape="wide",
                  choice="A",
                  varying=c(4:18),
@@ -237,11 +237,19 @@ S <- mlogit.data(modechoice.training,
                  id.var="Case")
 ```
 
+The `mlogit.data()` function shapes the data into a suitable form for the use of the `mlogit()` function. There are several parameters to be defined in this function:
+
+* `data` specifies the dataset to be used. Here, we use the training set created previously.
+
+* `varying` refers to the columns that correspond to the attributes of the choice.
+
+* `alt.levels` specifies a list of the choices available (Public bus, Cycling/PMDs, or Dalphin).
+
 <br></br>
 
 #### 4.3 Calculating AIC
 
-The Akaike Information Criterion (AIC) is.... a lower AIC value is better. The formula is given by:
+The Akaike Information Criterion (AIC) is a measure of the quality of fit of a model which also takes model complexity into account. A lower AIC value is more desirable. The formula is given by:
 
 $$AIC = -2 LL(\hat\beta) + 2|\hat\beta|$$
 
@@ -400,6 +408,15 @@ AIC(M23) #1308.912
 <br></br>
 
 #### 4.4 Variable Selection
+
+There are three broad types of variable selection:
+
+* Forward: Add one variable at a time. Remove this variable if it is not significant. If significant, add another variable.
+
+* Backward: Add all variables into model. Remove least significant variable each time. 
+
+* Stepwise:  Combination of the forward and backward selection techniques.  After each step in which a variable was added, all variables in the model are checked to see if their significance has been reduced below the threshold significance level. If a nonsignificant variable is found, it is removed from the model. A variable can be added or removed from the previous model.
+
 
 |Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|

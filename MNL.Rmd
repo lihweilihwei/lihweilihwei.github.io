@@ -7,6 +7,7 @@ output:
       toc_depth: 4
       theme: readable
       css: report_styles.css
+      df_print: paged
 ---
 
 <hr>

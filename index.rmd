@@ -29,8 +29,22 @@ renderText({
 
 <center><h3>**Waterborne Transportation in the Greater Southern Waterfront**</h3></center>
 
-<center>Add an introduction here.</center>
+<center>_Which mode would you take?_</center>
+
+<hr>
+
+Determining mode choice is one of the four components in the trip-based travel demand model.
+
+<center>![_Four-step Travel Demand Model_](four-step-travel-demand-model.png)</center>
 
 <br></br>
 
-<center>Click on the navigation bar above.</center>
+The introduction of a new mode, the Dalphin, brings forth several questions:
+
+* How well will the Dalphin be received compared to other modes?
+
+* Which attributes influence a commuter's decision the most?
+
+To answer these questions, we begin by gathering real responses through a <a href="statedpref.html">stated preference survey</a>, followed by <a href="MNL.html">building a model</a> that best describes the data and gain insights in the process. 
+
+Finally, we demonstrate this model through an <a href="apps.html">interactive app</a> that allows you to tweak attributes and instantly see their effect on mode choice. 

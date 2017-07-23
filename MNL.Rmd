@@ -204,6 +204,7 @@ modechoice.test = subset(modechoice, mask==FALSE)
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(knitr)
+library(kableExtra)
 ```
 
 The table below shows the first 16 rows of the training set. All 8 choice tasks of an individual are preserved. `Case` refers to the individual, while `Task` refers to the choice task.
@@ -424,50 +425,6 @@ There are three broad types of variable selection:
 
 The stepwise variable selection was executed for its thoroughness.
 
-|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
-|1    |$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M1), 3)`|
-|2    |$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M2), 3)`|
-|3    |$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M3), 3)`|
-|4    |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M4), 3)`|
-
-Model 2 the better model as it has the lowest AIC. We now build upon Model 2 by including individual-specific attributes.
-
-|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
-|5    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |            |            |            |            |`r round(calc.AIC(M5), 3)`|
-|6    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |`r round(calc.AIC(M6), 3)`|
-|7    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|            |            |            |            |`r round(calc.AIC(M7), 3)`|
-|8    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|$\checkmark$|            |            |            |`r round(calc.AIC(M8), 3)`|
-|9    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M9), 3)`|
-|10   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |`r round(calc.AIC(M10), 3)`|
-|11   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |`r round(calc.AIC(M11), 3)`|
-|12   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |`r round(calc.AIC(M12), 3)`|
-|13   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M13), 3)`|
-
-
-Now we try adding the other mode-specific variables that we removed just now.
-
-|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
-|14   |$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M14), 3)`|
-|15   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M15), 3)`|
-|16   |$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M16), 3)`|
-
-Model 11 is the best as it has the lowest AIC and highest proportion of significant coefficients. Now we build upon Model 4 by including individual-specific attributes.
-
-|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
-|17   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |            |            |            |`r round(calc.AIC(M17), 3)`|
-|18   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |`r round(calc.AIC(M18), 3)`|
-|19   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |`r round(calc.AIC(M19), 3)`|
-|20   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |`r round(calc.AIC(M20), 3)`|
-|21   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M21), 3)`|
-|22   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |`r round(calc.AIC(M22), 3)`|
-|23   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |`r round(calc.AIC(M23), 3)`|
-
-Overall, Model 23 is the best model with the lowest AIC value.
-
 ```{r echo=FALSE, results='hide'}
 
 models = data.frame(matrix(nrow = 23, ncol = 15))
@@ -499,12 +456,89 @@ models[22,] = c(22, "O", "O", "O", "O", "", "O", "O", "O", "O", "", "", "", "", 
 models[23,] = c(23, "O", "O", "O", "O", "", "O", "O", "O", "O", "", "", "O", "", round(calc.AIC(M23), 3))
 ```
 
+```{r echo=FALSE, results="asis"}
+kable(as.matrix(models[1:4,]), format = "html", row.names = FALSE) %>%
+  kable_styling(bootstrap_options = c("responsive", "condensed"),
+                font_size = 13)
+```
+
+<!--
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|1    |$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M1), 3)`|
+|2    |$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M2), 3)`|
+|3    |$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M3), 3)`|
+|4    |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |`r round(calc.AIC(M4), 3)`|
+-->
+
+Model 2 the better model as it has the lowest AIC. We now build upon Model 2 by including individual-specific attributes.
+
+```{r echo=FALSE}
+kable(models[5:13,], format = "html", row.names = FALSE) %>%
+  kable_styling(bootstrap_options = c("responsive", "condensed"),
+                font_size = 13)
+```
+
+<!--
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|5    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |            |            |            |            |`r round(calc.AIC(M5), 3)`|
+|6    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |`r round(calc.AIC(M6), 3)`|
+|7    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|            |            |            |            |`r round(calc.AIC(M7), 3)`|
+|8    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|$\checkmark$|            |            |            |`r round(calc.AIC(M8), 3)`|
+|9    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M9), 3)`|
+|10   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |`r round(calc.AIC(M10), 3)`|
+|11   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |`r round(calc.AIC(M11), 3)`|
+|12   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |`r round(calc.AIC(M12), 3)`|
+|13   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M13), 3)`|
+-->
+
+Now we try adding the other mode-specific variables that we removed just now.
+
+```{r echo=FALSE}
+kable(models[14:16,], format = "html", row.names = FALSE) %>%
+  kable_styling(bootstrap_options = c("responsive", "condensed"),
+                font_size = 13)
+```
+
+<!--
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|14   |$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M14), 3)`|
+|15   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M15), 3)`|
+|16   |$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M16), 3)`|
+-->
+
+Model 11 is the best as it has the lowest AIC and highest proportion of significant coefficients. Now we build upon Model 4 by including individual-specific attributes.
+
+```{r echo=FALSE}
+kable(models[17:23,], format = "html", row.names = FALSE) %>%
+  kable_styling(bootstrap_options = c("responsive", "condensed"),
+                font_size = 13)
+```
+
+
+<!--
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|17   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |            |            |            |`r round(calc.AIC(M17), 3)`|
+|18   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |`r round(calc.AIC(M18), 3)`|
+|19   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |`r round(calc.AIC(M19), 3)`|
+|20   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |`r round(calc.AIC(M20), 3)`|
+|21   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M21), 3)`|
+|22   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |`r round(calc.AIC(M22), 3)`|
+|23   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |`r round(calc.AIC(M23), 3)`|
+-->
+
+Overall, Model 23 is the best model with the lowest AIC value.
+
 This is the full table of all the models constructed.
 
 ```{r echo=FALSE}
-kable(models)
+kable(models, format = "html", row.names = FALSE) %>%
+  kable_styling(bootstrap_options = c("responsive", "condensed"),
+                font_size = 13)
 ```
-
 
 <br></br>
 
@@ -526,8 +560,9 @@ Looking at the first three rows of the dataset:
 P <- round(P, 3)
 ```
 
-```{r}
-kable(P[1:3,], align = 'c')
+```{r echo=FALSE}
+kable(P[1:3,], format = "html", align = 'c') %>%
+  kable_styling(bootstrap_options = c("striped"))
 ```
 
 For example, the individual corresponding to the first row will choose the bus with a `r round(P[1,1]*100, 1)`% chance, Shared Bicycles/PMDs with a `r round(P[1,2]*100, 1)`% chance, and the Dalphin with a `r round(P[1,3]*100, 1)`% chance.
@@ -555,8 +590,10 @@ levels(ActualChoice) = c("Bus", "Shared Bicycles/PMDs", "Dalphin")
 
 **Predicted Choice vs. Actual Choice**
 
-```{r}
-kable(table(PredictedChoice, ActualChoice))
+```{r echo=FALSE}
+kable(table(PredictedChoice, ActualChoice), format = "html") %>%
+  kable_styling(bootstrap_options = c("responsive")) %>%
+  add_header_above(c(" " = 1, "Actual Choice" = 3))
 ```
 
 

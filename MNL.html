@@ -752,973 +752,2129 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <li><p>Stepwise: Combination of the forward and backward selection techniques. After each step in which a variable was added, all variables in the model are checked to see if their significance has been reduced below the threshold significance level. If a nonsignificant variable is found, it is removed from the model. A variable can be added or removed from the previous model.</p></li>
 </ul>
 <p>The stepwise variable selection was executed for its thoroughness.</p>
-<table>
-<colgroup>
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="5%" />
-<col width="8%" />
-<col width="10%" />
-</colgroup>
+<?xml version="1.0" encoding="UTF-8"?>
+<table class="table table-responsive table-condensed" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="center">Model</th>
-<th align="center"><code>weather</code></th>
-<th align="center"><code>fare</code></th>
-<th align="center"><code>wait</code></th>
-<th align="center"><code>ivtt</code></th>
-<th align="center"><code>access</code></th>
-<th align="center"><code>Age</code></th>
-<th align="center"><code>Gender</code></th>
-<th align="center"><code>Income</code></th>
-<th align="center"><code>HouseholdType</code></th>
-<th align="center"><code>HouseholdSize</code></th>
-<th align="center"><code>Residential</code></th>
-<th align="center"><code>Cars</code></th>
-<th align="center"><code>Concession</code></th>
-<th align="left">AIC Value</th>
+<tr>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+weather
+</th>
+<th style="text-align:left;">
+fare
+</th>
+<th style="text-align:left;">
+wait
+</th>
+<th style="text-align:left;">
+ivtt
+</th>
+<th style="text-align:left;">
+access
+</th>
+<th style="text-align:left;">
+Age
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:left;">
+Income
+</th>
+<th style="text-align:left;">
+HouseholdType
+</th>
+<th style="text-align:left;">
+HouseholdSize
+</th>
+<th style="text-align:left;">
+Residential
+</th>
+<th style="text-align:left;">
+Cars
+</th>
+<th style="text-align:left;">
+Concession
+</th>
+<th style="text-align:left;">
+AIC Value
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center">1</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1357.116</td>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1357.116
+</td>
 </tr>
-<tr class="even">
-<td align="center">2</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1333.944</td>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1333.944
+</td>
 </tr>
-<tr class="odd">
-<td align="center">3</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1334.169</td>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1334.169
+</td>
 </tr>
-<tr class="even">
-<td align="center">4</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1335.254</td>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1335.254
+</td>
 </tr>
 </tbody>
 </table>
+<!--
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|1    |$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |            |1357.116|
+|2    |$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |            |1333.944|
+|3    |$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |            |1334.169|
+|4    |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |            |            |            |            |            |1335.254|
+-->
 <p>Model 2 the better model as it has the lowest AIC. We now build upon Model 2 by including individual-specific attributes.</p>
-<table>
-<colgroup>
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="5%" />
-<col width="8%" />
-<col width="10%" />
-</colgroup>
+<?xml version="1.0" encoding="UTF-8"?>
+<table class="table table-responsive table-condensed" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="center">Model</th>
-<th align="center"><code>weather</code></th>
-<th align="center"><code>fare</code></th>
-<th align="center"><code>wait</code></th>
-<th align="center"><code>ivtt</code></th>
-<th align="center"><code>access</code></th>
-<th align="center"><code>Age</code></th>
-<th align="center"><code>Gender</code></th>
-<th align="center"><code>Income</code></th>
-<th align="center"><code>HouseholdType</code></th>
-<th align="center"><code>HouseholdSize</code></th>
-<th align="center"><code>Residential</code></th>
-<th align="center"><code>Cars</code></th>
-<th align="center"><code>Concession</code></th>
-<th align="left">AIC Value</th>
+<tr>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+weather
+</th>
+<th style="text-align:left;">
+fare
+</th>
+<th style="text-align:left;">
+wait
+</th>
+<th style="text-align:left;">
+ivtt
+</th>
+<th style="text-align:left;">
+access
+</th>
+<th style="text-align:left;">
+Age
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:left;">
+Income
+</th>
+<th style="text-align:left;">
+HouseholdType
+</th>
+<th style="text-align:left;">
+HouseholdSize
+</th>
+<th style="text-align:left;">
+Residential
+</th>
+<th style="text-align:left;">
+Cars
+</th>
+<th style="text-align:left;">
+Concession
+</th>
+<th style="text-align:left;">
+AIC Value
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center">5</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1326.97</td>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1326.97
+</td>
 </tr>
-<tr class="even">
-<td align="center">6</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1328.847</td>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1328.847
+</td>
 </tr>
-<tr class="odd">
-<td align="center">7</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1320.019</td>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1320.019
+</td>
 </tr>
-<tr class="even">
-<td align="center">8</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1323.093</td>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1323.093
+</td>
 </tr>
-<tr class="odd">
-<td align="center">9</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1328.914</td>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1328.914
+</td>
 </tr>
-<tr class="even">
-<td align="center">10</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1324.68</td>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1324.68
+</td>
 </tr>
-<tr class="odd">
-<td align="center">11</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1318.375</td>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1318.375
+</td>
 </tr>
-<tr class="even">
-<td align="center">12</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="left">1319.543</td>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1319.543
+</td>
 </tr>
-<tr class="odd">
-<td align="center">13</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="left">1318.999</td>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+1318.999
+</td>
 </tr>
 </tbody>
 </table>
+<!--
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|5    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |            |            |            |            |1326.97|
+|6    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |1328.847|
+|7    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|            |            |            |            |1320.019|
+|8    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|$\checkmark$|            |            |            |1323.093|
+|9    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|            |            |            |1328.914|
+|10   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |1324.68|
+|11   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |1318.375|
+|12   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |1319.543|
+|13   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|1318.999|
+-->
 <p>Now we try adding the other mode-specific variables that we removed just now.</p>
-<table>
-<colgroup>
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="5%" />
-<col width="8%" />
-<col width="10%" />
-</colgroup>
+<?xml version="1.0" encoding="UTF-8"?>
+<table class="table table-responsive table-condensed" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="center">Model</th>
-<th align="center"><code>weather</code></th>
-<th align="center"><code>fare</code></th>
-<th align="center"><code>wait</code></th>
-<th align="center"><code>ivtt</code></th>
-<th align="center"><code>access</code></th>
-<th align="center"><code>Age</code></th>
-<th align="center"><code>Gender</code></th>
-<th align="center"><code>Income</code></th>
-<th align="center"><code>HouseholdType</code></th>
-<th align="center"><code>HouseholdSize</code></th>
-<th align="center"><code>Residential</code></th>
-<th align="center"><code>Cars</code></th>
-<th align="center"><code>Concession</code></th>
-<th align="left">AIC Value</th>
+<tr>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+weather
+</th>
+<th style="text-align:left;">
+fare
+</th>
+<th style="text-align:left;">
+wait
+</th>
+<th style="text-align:left;">
+ivtt
+</th>
+<th style="text-align:left;">
+access
+</th>
+<th style="text-align:left;">
+Age
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:left;">
+Income
+</th>
+<th style="text-align:left;">
+HouseholdType
+</th>
+<th style="text-align:left;">
+HouseholdSize
+</th>
+<th style="text-align:left;">
+Residential
+</th>
+<th style="text-align:left;">
+Cars
+</th>
+<th style="text-align:left;">
+Concession
+</th>
+<th style="text-align:left;">
+AIC Value
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center">14</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="left">1319.172</td>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+1319.172
+</td>
 </tr>
-<tr class="even">
-<td align="center">15</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="left">1320.237</td>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+1320.237
+</td>
 </tr>
-<tr class="odd">
-<td align="center">16</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="left">1320.235</td>
+<tr>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+1320.235
+</td>
 </tr>
 </tbody>
 </table>
+<!--
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|14   |$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|1319.172|
+|15   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|1320.237|
+|16   |$\checkmark$|$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|1320.235|
+-->
 <p>Model 11 is the best as it has the lowest AIC and highest proportion of significant coefficients. Now we build upon Model 4 by including individual-specific attributes.</p>
-<table>
-<colgroup>
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="5%" />
-<col width="8%" />
-<col width="10%" />
-</colgroup>
+<?xml version="1.0" encoding="UTF-8"?>
+<table class="table table-responsive table-condensed" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="center">Model</th>
-<th align="center"><code>weather</code></th>
-<th align="center"><code>fare</code></th>
-<th align="center"><code>wait</code></th>
-<th align="center"><code>ivtt</code></th>
-<th align="center"><code>access</code></th>
-<th align="center"><code>Age</code></th>
-<th align="center"><code>Gender</code></th>
-<th align="center"><code>Income</code></th>
-<th align="center"><code>HouseholdType</code></th>
-<th align="center"><code>HouseholdSize</code></th>
-<th align="center"><code>Residential</code></th>
-<th align="center"><code>Cars</code></th>
-<th align="center"><code>Concession</code></th>
-<th align="left">AIC Value</th>
+<tr>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+weather
+</th>
+<th style="text-align:left;">
+fare
+</th>
+<th style="text-align:left;">
+wait
+</th>
+<th style="text-align:left;">
+ivtt
+</th>
+<th style="text-align:left;">
+access
+</th>
+<th style="text-align:left;">
+Age
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:left;">
+Income
+</th>
+<th style="text-align:left;">
+HouseholdType
+</th>
+<th style="text-align:left;">
+HouseholdSize
+</th>
+<th style="text-align:left;">
+Residential
+</th>
+<th style="text-align:left;">
+Cars
+</th>
+<th style="text-align:left;">
+Concession
+</th>
+<th style="text-align:left;">
+AIC Value
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center">17</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1328.258</td>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1328.258
+</td>
 </tr>
-<tr class="even">
-<td align="center">18</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1330.134</td>
+<tr>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1330.134
+</td>
 </tr>
-<tr class="odd">
-<td align="center">19</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1322.806</td>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1322.806
+</td>
 </tr>
-<tr class="even">
-<td align="center">20</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1325.969</td>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1325.969
+</td>
 </tr>
-<tr class="odd">
-<td align="center">21</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1332.142</td>
+<tr>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1332.142
+</td>
 </tr>
-<tr class="even">
-<td align="center">22</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left">1311.476</td>
+<tr>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1311.476
+</td>
 </tr>
-<tr class="odd">
-<td align="center">23</td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\checkmark\)</span></td>
-<td align="center"></td>
-<td align="left">1308.912</td>
+<tr>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1308.912
+</td>
 </tr>
 </tbody>
 </table>
+<!--
+|Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
+|17   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |            |            |            |1328.258|
+|18   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |            |            |            |1330.134|
+|19   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|            |            |            |            |1322.806|
+|20   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |            |1325.969|
+|21   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |            |            |1332.142|
+|22   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |            |            |1311.476|
+|23   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |1308.912|
+-->
 <p>Overall, Model 23 is the best model with the lowest AIC value.</p>
 <p>This is the full table of all the models constructed.</p>
-<table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table class="table table-responsive table-condensed" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">model</th>
-<th align="left">weather</th>
-<th align="left">fare</th>
-<th align="left">wait</th>
-<th align="left">ivtt</th>
-<th align="left">access</th>
-<th align="left">Age</th>
-<th align="left">Gender</th>
-<th align="left">Income</th>
-<th align="left">HouseholdType</th>
-<th align="left">HouseholdSize</th>
-<th align="left">Residential</th>
-<th align="left">Cars</th>
-<th align="left">Concession</th>
-<th align="left">AIC Value</th>
+<tr>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+weather
+</th>
+<th style="text-align:left;">
+fare
+</th>
+<th style="text-align:left;">
+wait
+</th>
+<th style="text-align:left;">
+ivtt
+</th>
+<th style="text-align:left;">
+access
+</th>
+<th style="text-align:left;">
+Age
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:left;">
+Income
+</th>
+<th style="text-align:left;">
+HouseholdType
+</th>
+<th style="text-align:left;">
+HouseholdSize
+</th>
+<th style="text-align:left;">
+Residential
+</th>
+<th style="text-align:left;">
+Cars
+</th>
+<th style="text-align:left;">
+Concession
+</th>
+<th style="text-align:left;">
+AIC Value
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1357.116</td>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1357.116
+</td>
 </tr>
-<tr class="even">
-<td align="left">2</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1333.944</td>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1333.944
+</td>
 </tr>
-<tr class="odd">
-<td align="left">3</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1334.169</td>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1334.169
+</td>
 </tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1335.254</td>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1335.254
+</td>
 </tr>
-<tr class="odd">
-<td align="left">5</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1326.97</td>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1326.97
+</td>
 </tr>
-<tr class="even">
-<td align="left">6</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1328.847</td>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1328.847
+</td>
 </tr>
-<tr class="odd">
-<td align="left">7</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1320.019</td>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1320.019
+</td>
 </tr>
-<tr class="even">
-<td align="left">8</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1323.093</td>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1323.093
+</td>
 </tr>
-<tr class="odd">
-<td align="left">9</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1328.914</td>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1328.914
+</td>
 </tr>
-<tr class="even">
-<td align="left">10</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1324.68</td>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1324.68
+</td>
 </tr>
-<tr class="odd">
-<td align="left">11</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1318.375</td>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1318.375
+</td>
 </tr>
-<tr class="even">
-<td align="left">12</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">1319.543</td>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1319.543
+</td>
 </tr>
-<tr class="odd">
-<td align="left">13</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">1318.999</td>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+1318.999
+</td>
 </tr>
-<tr class="even">
-<td align="left">14</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">1319.172</td>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+1319.172
+</td>
 </tr>
-<tr class="odd">
-<td align="left">15</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">1320.237</td>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+1320.237
+</td>
 </tr>
-<tr class="even">
-<td align="left">16</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">1320.235</td>
+<tr>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+1320.235
+</td>
 </tr>
-<tr class="odd">
-<td align="left">17</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1328.258</td>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1328.258
+</td>
 </tr>
-<tr class="even">
-<td align="left">18</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1330.134</td>
+<tr>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1330.134
+</td>
 </tr>
-<tr class="odd">
-<td align="left">19</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1322.806</td>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1322.806
+</td>
 </tr>
-<tr class="even">
-<td align="left">20</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1325.969</td>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1325.969
+</td>
 </tr>
-<tr class="odd">
-<td align="left">21</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1332.142</td>
+<tr>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1332.142
+</td>
 </tr>
-<tr class="even">
-<td align="left">22</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1311.476</td>
+<tr>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1311.476
+</td>
 </tr>
-<tr class="odd">
-<td align="left">23</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">O</td>
-<td align="left"></td>
-<td align="left">1308.912</td>
+<tr>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1308.912
+</td>
 </tr>
 </tbody>
 </table>
@@ -1729,30 +2885,54 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <p>We use the <code>predict()</code> function to give the probability of an individual choosing a particular mode.</p>
 <pre class="r"><code>P &lt;- predict(M23, newdata = S, type = &quot;response&quot;)</code></pre>
 <p>Looking at the first three rows of the dataset:</p>
-<pre class="r"><code>kable(P[1:3,], align = &#39;c&#39;)</code></pre>
-<table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="center">Bus</th>
-<th align="center">Shared Bicycles/PMDs</th>
-<th align="center">Dalphin</th>
+<tr>
+<th style="text-align:center;">
+Bus
+</th>
+<th style="text-align:center;">
+Shared Bicycles/PMDs
+</th>
+<th style="text-align:center;">
+Dalphin
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center">0.278</td>
-<td align="center">0.614</td>
-<td align="center">0.108</td>
+<tr>
+<td style="text-align:center;">
+0.278
+</td>
+<td style="text-align:center;">
+0.614
+</td>
+<td style="text-align:center;">
+0.108
+</td>
 </tr>
-<tr class="even">
-<td align="center">0.265</td>
-<td align="center">0.584</td>
-<td align="center">0.151</td>
+<tr>
+<td style="text-align:center;">
+0.265
+</td>
+<td style="text-align:center;">
+0.584
+</td>
+<td style="text-align:center;">
+0.151
+</td>
 </tr>
-<tr class="odd">
-<td align="center">0.232</td>
-<td align="center">0.511</td>
-<td align="center">0.257</td>
+<tr>
+<td style="text-align:center;">
+0.232
+</td>
+<td style="text-align:center;">
+0.511
+</td>
+<td style="text-align:center;">
+0.257
+</td>
 </tr>
 </tbody>
 </table>
@@ -1762,34 +2942,73 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <p>Using a confusion matrix, we compare the actual choice in the training set with the predicted choice by the model.</p>
 <pre class="r"><code>ActualChoice &lt;- modechoice.training$A</code></pre>
 <p><strong>Predicted Choice vs. Actual Choice</strong></p>
-<pre class="r"><code>kable(table(PredictedChoice, ActualChoice))</code></pre>
-<table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table class="table table-responsive" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th></th>
-<th align="right">Bus</th>
-<th align="right">Shared Bicycles/PMDs</th>
-<th align="right">Dalphin</th>
+<tr>
+<th style="border-bottom:hidden"/>
+<th style="text-align:center; border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;" colspan="3">
+<div style="border-bottom: 1px solid #ddd;padding-bottom: 5px;">
+Actual Choice
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Bus
+</th>
+<th style="text-align:right;">
+Shared Bicycles/PMDs
+</th>
+<th style="text-align:right;">
+Dalphin
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>Bus</td>
-<td align="right">68</td>
-<td align="right">19</td>
-<td align="right">46</td>
+<tr>
+<td style="text-align:left;">
+Bus
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+46
+</td>
 </tr>
-<tr class="even">
-<td>Shared Bicycles/PMDs</td>
-<td align="right">26</td>
-<td align="right">42</td>
-<td align="right">17</td>
+<tr>
+<td style="text-align:left;">
+Shared Bicycles/PMDs
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:right;">
+17
+</td>
 </tr>
-<tr class="odd">
-<td>Dalphin</td>
-<td align="right">132</td>
-<td align="right">64</td>
-<td align="right">282</td>
+<tr>
+<td style="text-align:left;">
+Dalphin
+</td>
+<td style="text-align:right;">
+132
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+282
+</td>
 </tr>
 </tbody>
 </table>

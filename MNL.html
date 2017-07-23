@@ -70,6 +70,7 @@ h6 {
 }
 </style>
 
+<link rel="stylesheet" href="report_styles.css" type="text/css" />
 
 </head>
 
@@ -326,7 +327,7 @@ div.tocify {
 <div id="predicting-na-incomes-with-linear-regression" class="section level2">
 <h2>3 Predicting “NA” Incomes with Linear Regression</h2>
 <p>Some of the entries in the <code>Income</code> column are <code>NA</code>. To fill this missing information, we used linear regression to predict their values.</p>
-<p>We separate the dataset into two: one with stated incomes, and another which have <code>NA</code> for <code>Income</code>.</p>
+<p>We separate the dataset into two: one with stated incomes, and another which has <code>NA</code> for <code>Income</code>.</p>
 <pre class="r"><code>incomenotNA &lt;- subset(modechoice, modechoice$Income != &quot;NA&quot;)
 incomeNA &lt;- subset(modechoice,is.na(modechoice$Income))</code></pre>
 <p>There are 752 observations with stated incomes and 248 observations where income is <code>NA</code>.</p>
@@ -335,9 +336,10 @@ incomeNA &lt;- subset(modechoice,is.na(modechoice$Income))</code></pre>
 <h4>3.1 Creating Training and Test Sets</h4>
 <p>We now create training and test sets from the observations where incomes are stated (<code>incomenotNA</code>). The <code>caTools</code> package is used.</p>
 <pre class="r"><code>library(caTools)</code></pre>
-<p>We set the random seed so that the results will be replicable. The training and test sets are obtained with a 65/35 split ratio.</p>
-<pre class="r"><code>set.seed(1)
-split &lt;- sample.split(incomenotNA$Age, SplitRatio = 0.65)
+<p>We set the random seed so that the results will be replicable.</p>
+<pre class="r"><code>set.seed(1)</code></pre>
+<p>We use the <code>sample.split()</code> function to obtain the training and test sets with a 65/35 split ratio. Both income training and test sets maintained the same proportion of <code>Age</code> variable as in the known income dataset, <code>incomenotNA</code>.</p>
+<pre class="r"><code>split &lt;- sample.split(incomenotNA$Age, SplitRatio = 0.65)
 
 incometraining &lt;- subset(incomenotNA,split==TRUE)
 incometest &lt;- subset(incomenotNA,split==FALSE)</code></pre>
@@ -345,7 +347,7 @@ incometest &lt;- subset(incomenotNA,split==FALSE)</code></pre>
 </div>
 <div id="creating-a-linear-regression-model" class="section level4">
 <h4>3.2 Creating a Linear Regression Model</h4>
-<p>We now create a linear regression. The first model includes all demographic information of the individual:</p>
+<p>We now create a linear regression model with the training set. The first model includes all demographic information of the individual:</p>
 <table>
 <thead>
 <tr class="header">
@@ -559,7 +561,7 @@ modechoice$Income &lt;- ifelse(is.na(modechoice$Income),
 <p><br></br></p>
 <div id="generating-training-and-test-sets" class="section level4">
 <h4>4.1 Generating Training and Test Sets</h4>
-<p>Each row in the dataset corresponds to a choice task of a particular individual. We randomly split the 125 individuals into the training or test set with a 70:30 ratio, while keeping all 8 choice tasks intact.</p>
+<p>Each row in the dataset corresponds to a choice task of a particular individual. We randomly split the 125 individuals into the training or test set with a 70/30 split ratio, while keeping all 8 choice tasks intact.</p>
 <pre class="r"><code>set.seed(0)
 mask = rep(x = sample.split(rep(1, 125), SplitRatio = 0.7),
            each = 8)
@@ -749,6 +751,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <li><p>Backward: Add all variables into model. Remove least significant variable each time.</p></li>
 <li><p>Stepwise: Combination of the forward and backward selection techniques. After each step in which a variable was added, all variables in the model are checked to see if their significance has been reduced below the threshold significance level. If a nonsignificant variable is found, it is removed from the model. A variable can be added or removed from the previous model.</p></li>
 </ul>
+<p>The stepwise variable selection was executed for its thoroughness.</p>
 <table>
 <colgroup>
 <col width="5%" />
@@ -999,6 +1002,23 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="left">1324.68</td>
 </tr>
 <tr class="odd">
+<td align="center">11</td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"><span class="math inline">\(\checkmark\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left">1318.375</td>
+</tr>
+<tr class="even">
 <td align="center">12</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -1015,7 +1035,7 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="center"></td>
 <td align="left">1319.543</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center">13</td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
 <td align="center"><span class="math inline">\(\checkmark\)</span></td>
@@ -1287,6 +1307,421 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </tbody>
 </table>
 <p>Overall, Model 23 is the best model with the lowest AIC value.</p>
+<p>This is the full table of all the models constructed.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">model</th>
+<th align="left">weather</th>
+<th align="left">fare</th>
+<th align="left">wait</th>
+<th align="left">ivtt</th>
+<th align="left">access</th>
+<th align="left">Age</th>
+<th align="left">Gender</th>
+<th align="left">Income</th>
+<th align="left">HouseholdType</th>
+<th align="left">HouseholdSize</th>
+<th align="left">Residential</th>
+<th align="left">Cars</th>
+<th align="left">Concession</th>
+<th align="left">AIC Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1357.116</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1333.944</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1334.169</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1335.254</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1326.97</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1328.847</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1320.019</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1323.093</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1328.914</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1324.68</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1318.375</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">1319.543</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">1318.999</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">1319.172</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">1320.237</td>
+</tr>
+<tr class="even">
+<td align="left">16</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">1320.235</td>
+</tr>
+<tr class="odd">
+<td align="left">17</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1328.258</td>
+</tr>
+<tr class="even">
+<td align="left">18</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1330.134</td>
+</tr>
+<tr class="odd">
+<td align="left">19</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1322.806</td>
+</tr>
+<tr class="even">
+<td align="left">20</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1325.969</td>
+</tr>
+<tr class="odd">
+<td align="left">21</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1332.142</td>
+</tr>
+<tr class="even">
+<td align="left">22</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1311.476</td>
+</tr>
+<tr class="odd">
+<td align="left">23</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left"></td>
+<td align="left">1308.912</td>
+</tr>
+</tbody>
+</table>
 <p><br></br></p>
 </div>
 <div id="predicting-mode-choice" class="section level4">

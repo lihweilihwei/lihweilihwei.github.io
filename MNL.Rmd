@@ -6,7 +6,7 @@ output:
       toc_float: true
       toc_depth: 4
       theme: readable
-  
+      css: report_styles.css
 ---
 
 <hr>
@@ -41,7 +41,7 @@ str(modechoice)
 
 Some of the entries in the `Income` column are `NA`. To fill this missing information, we used linear regression to predict their values.
 
-We separate the dataset into two: one with stated incomes, and another which have `NA` for `Income`.
+We separate the dataset into two: one with stated incomes, and another which has `NA` for `Income`.
 
 ```{r}
 incomenotNA <- subset(modechoice, modechoice$Income != "NA")
@@ -60,10 +60,15 @@ We now create training and test sets from the observations where incomes are sta
 library(caTools)
 ```
 
-We set the random seed so that the results will be replicable. The training and test sets are obtained with a 65/35 split ratio.
+We set the random seed so that the results will be replicable. 
 
 ```{r}
 set.seed(1)
+```
+
+We use the `sample.split()` function to obtain the training and test sets with a 65/35 split ratio. Both income training and test sets maintained the same proportion of `Age` variable as in the known income dataset, `incomenotNA`.
+
+```{r}
 split <- sample.split(incomenotNA$Age, SplitRatio = 0.65)
 
 incometraining <- subset(incomenotNA,split==TRUE)
@@ -74,7 +79,7 @@ incometest <- subset(incomenotNA,split==FALSE)
 
 #### 3.2 Creating a Linear Regression Model
 
-We now create a linear regression. The first model includes all demographic information of the individual:
+We now create a linear regression model with the training set. The first model includes all demographic information of the individual:
 
 Variable          Description
 -------------     -----------------------
@@ -187,7 +192,7 @@ Now that all entries in the dataset have no `NA` values, we can proceed to condu
 
 #### 4.1 Generating Training and Test Sets
 
-Each row in the dataset corresponds to a choice task of a particular individual. We  randomly split the 125 individuals into the training or test set with a 70:30 ratio, while keeping all 8 choice tasks intact.
+Each row in the dataset corresponds to a choice task of a particular individual. We  randomly split the 125 individuals into the training or test set with a 70/30 split ratio, while keeping all 8 choice tasks intact.
 
 ```{r}
 set.seed(0)
@@ -417,6 +422,7 @@ There are three broad types of variable selection:
 
 * Stepwise:  Combination of the forward and backward selection techniques.  After each step in which a variable was added, all variables in the model are checked to see if their significance has been reduced below the threshold significance level. If a nonsignificant variable is found, it is removed from the model. A variable can be added or removed from the previous model.
 
+The stepwise variable selection was executed for its thoroughness.
 
 |Model|`weather`|`fare`|`wait`|`ivtt`|`access`|`Age`|`Gender`|`Income`|`HouseholdType`|`HouseholdSize`|`Residential`|`Cars`|`Concession`|AIC Value|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:------:|:------:|:------:|:---:|:------:|:---------|
@@ -435,8 +441,10 @@ Model 2 the better model as it has the lowest AIC. We now build upon Model 2 by 
 |8    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |$\checkmark$|$\checkmark$|            |            |            |`r round(calc.AIC(M8), 3)`|
 |9    |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|            |            |            |`r round(calc.AIC(M9), 3)`|
 |10   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |            |            |$\checkmark$|$\checkmark$|            |            |`r round(calc.AIC(M10), 3)`|
+|11   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|$\checkmark$|            |            |`r round(calc.AIC(M11), 3)`|
 |12   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |`r round(calc.AIC(M12), 3)`|
 |13   |$\checkmark$|$\checkmark$|            |            |            |$\checkmark$|            |$\checkmark$|            |$\checkmark$|            |            |$\checkmark$|`r round(calc.AIC(M13), 3)`|
+
 
 Now we try adding the other mode-specific variables that we removed just now.
 
@@ -459,6 +467,44 @@ Model 11 is the best as it has the lowest AIC and highest proportion of signific
 |23   |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |$\checkmark$|$\checkmark$|$\checkmark$|$\checkmark$|            |            |$\checkmark$|            |`r round(calc.AIC(M23), 3)`|
 
 Overall, Model 23 is the best model with the lowest AIC value.
+
+```{r echo=FALSE, results='hide'}
+
+models = data.frame(matrix(nrow = 23, ncol = 15))
+colnames(models) = c("model", "weather", "fare", "wait", "ivtt", "access", "Age", "Gender", "Income", "HouseholdType", "HouseholdSize", "Residential", "Cars", "Concession", "AIC Value")
+
+models[1,] = c(1, "O", "", "", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M1), 3))
+models[2,] = c(2, "O", "O", "", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M2), 3))
+models[3,] = c(3, "O", "O", "O", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M3), 3))
+models[4,] = c(4, "O", "O", "O", "O", "", "", "", "", "", "", "", "", "", round(calc.AIC(M4), 3))
+models[5,] = c(5, "O", "O", "", "", "", "O", "", "", "", "", "", "", "", round(calc.AIC(M5), 3))
+models[6,] = c(6, "O", "O", "", "", "", "O", "O", "", "", "", "", "", "", round(calc.AIC(M6), 3))
+models[7,] = c(7, "O", "O", "", "", "", "O", "", "", "O", "", "", "", "", round(calc.AIC(M7), 3))
+models[8,] = c(8, "O", "O", "", "", "", "O", "", "", "O", "O", "", "", "", round(calc.AIC(M8), 3))
+models[9,] = c(9, "O", "O", "", "", "", "O", "", "", "", "O", "", "", "", round(calc.AIC(M9), 3))
+models[10,] = c(10, "O", "O", "", "", "", "O", "", "", "", "O", "O", "", "", round(calc.AIC(M10), 3))
+models[11,] = c(11, "O", "O", "", "", "", "O", "", "O", "", "O", "", "", "", round(calc.AIC(M11), 3))
+models[12,] = c(12, "O", "O", "", "", "", "O", "", "O", "", "O", "", "O", "", round(calc.AIC(M12), 3))
+models[13,] = c(13, "O", "O", "", "", "", "O", "", "O", "", "O", "", "", "O", round(calc.AIC(M13), 3))
+models[14,] = c(14, "O", "O", "O", "", "", "O", "", "O", "", "O", "", "", "O", round(calc.AIC(M14), 3))
+models[15,] = c(15, "O", "O", "O", "O", "", "O", "", "O", "", "O", "", "", "O", round(calc.AIC(M15), 3))
+models[16,] = c(16, "O", "O", "", "O", "", "O", "", "O", "", "O", "", "", "O", round(calc.AIC(M16), 3))
+
+models[17,] = c(17, "O", "O", "O", "O", "", "O", "", "", "", "", "", "", "", round(calc.AIC(M17), 3))
+models[18,] = c(18, "O", "O", "O", "O", "", "O", "O", "", "", "", "", "", "", round(calc.AIC(M18), 3))
+models[19,] = c(19, "O", "O", "O", "O", "", "O", "O", "", "O", "", "", "", "", round(calc.AIC(M19), 3))
+models[20,] = c(20, "O", "O", "O", "O", "", "O", "O", "", "O", "O", "", "", "", round(calc.AIC(M20), 3))
+models[21,] = c(21, "O", "O", "O", "O", "", "O", "O", "", "", "O", "", "", "", round(calc.AIC(M21), 3))
+models[22,] = c(22, "O", "O", "O", "O", "", "O", "O", "O", "O", "", "", "", "", round(calc.AIC(M22), 3))
+models[23,] = c(23, "O", "O", "O", "O", "", "O", "O", "O", "O", "", "", "O", "", round(calc.AIC(M23), 3))
+```
+
+This is the full table of all the models constructed.
+
+```{r echo=FALSE}
+kable(models)
+```
+
 
 <br></br>
 

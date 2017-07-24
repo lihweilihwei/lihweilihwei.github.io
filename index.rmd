@@ -33,7 +33,7 @@ renderText({
 
 <hr>
 
-Determining mode choice is one of the four components in the trip-based travel demand model.
+Determining modal split is one of the four components in the trip-based travel demand model.
 
 <center>![_Four-step Travel Demand Model_](four-step-travel-demand-model.PNG)</center>
 

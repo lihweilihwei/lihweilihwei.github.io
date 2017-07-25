@@ -570,11 +570,10 @@ mask = rep(x = sample.split(rep(1, 125), SplitRatio = 0.7),
 modechoice.training = subset(modechoice, mask==TRUE)
 modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <p>The table below shows the first 16 rows of the training set. All 8 choice tasks of an individual are preserved. <code>Case</code> refers to the individual, while <code>Task</code> refers to the choice task.</p>
-<pre class="r"><code>kable(modechoice.training[1:16,2:6])</code></pre>
+<pre class="r"><code>kable(modechoice.training[1:16,2:6], row.names = FALSE)</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th></th>
 <th align="right">Case</th>
 <th align="right">Task</th>
 <th align="right">weather1</th>
@@ -584,7 +583,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td>9</td>
 <td align="right">2</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -592,7 +590,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">0</td>
 </tr>
 <tr class="even">
-<td>10</td>
 <td align="right">2</td>
 <td align="right">2</td>
 <td align="right">0</td>
@@ -600,7 +597,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
-<td>11</td>
 <td align="right">2</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -608,7 +604,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">0</td>
 </tr>
 <tr class="even">
-<td>12</td>
 <td align="right">2</td>
 <td align="right">4</td>
 <td align="right">0</td>
@@ -616,7 +611,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
-<td>13</td>
 <td align="right">2</td>
 <td align="right">5</td>
 <td align="right">1</td>
@@ -624,7 +618,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td>14</td>
 <td align="right">2</td>
 <td align="right">6</td>
 <td align="right">1</td>
@@ -632,7 +625,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">1</td>
 </tr>
 <tr class="odd">
-<td>15</td>
 <td align="right">2</td>
 <td align="right">7</td>
 <td align="right">1</td>
@@ -640,7 +632,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td>16</td>
 <td align="right">2</td>
 <td align="right">8</td>
 <td align="right">1</td>
@@ -648,7 +639,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">1</td>
 </tr>
 <tr class="odd">
-<td>17</td>
 <td align="right">3</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -656,7 +646,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">0</td>
 </tr>
 <tr class="even">
-<td>18</td>
 <td align="right">3</td>
 <td align="right">2</td>
 <td align="right">0</td>
@@ -664,7 +653,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
-<td>19</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -672,7 +660,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">0</td>
 </tr>
 <tr class="even">
-<td>20</td>
 <td align="right">3</td>
 <td align="right">4</td>
 <td align="right">0</td>
@@ -680,7 +667,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
-<td>21</td>
 <td align="right">3</td>
 <td align="right">5</td>
 <td align="right">1</td>
@@ -688,7 +674,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td>22</td>
 <td align="right">3</td>
 <td align="right">6</td>
 <td align="right">1</td>
@@ -696,7 +681,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">1</td>
 </tr>
 <tr class="odd">
-<td>23</td>
 <td align="right">3</td>
 <td align="right">7</td>
 <td align="right">1</td>
@@ -704,7 +688,6 @@ modechoice.test = subset(modechoice, mask==FALSE)</code></pre>
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td>24</td>
 <td align="right">3</td>
 <td align="right">8</td>
 <td align="right">1</td>
@@ -811,7 +794,7 @@ AIC Value
 1
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -846,10 +829,10 @@ O
 2
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -882,13 +865,13 @@ O
 3
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -919,16 +902,16 @@ O
 4
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1020,19 +1003,19 @@ AIC Value
 5
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1057,22 +1040,22 @@ O
 6
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1095,26 +1078,26 @@ O
 7
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1133,29 +1116,29 @@ O
 8
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1172,19 +1155,10 @@ O
 9
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1193,7 +1167,16 @@ O
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1210,19 +1193,10 @@ O
 10
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1231,10 +1205,19 @@ O
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1249,29 +1232,29 @@ O
 11
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1288,34 +1271,34 @@ O
 12
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1328,36 +1311,36 @@ O
 13
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 1318.999
@@ -1436,37 +1419,37 @@ AIC Value
 14
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 1319.172
@@ -1477,38 +1460,38 @@ O
 15
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 1320.237
@@ -1519,37 +1502,37 @@ O
 16
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 1320.235
@@ -1622,21 +1605,21 @@ AIC Value
 17
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1661,24 +1644,24 @@ O
 18
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1701,29 +1684,29 @@ O
 19
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1742,32 +1725,32 @@ O
 20
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1784,31 +1767,31 @@ O
 21
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1825,30 +1808,30 @@ O
 22
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1867,37 +1850,37 @@ O
 23
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -1977,7 +1960,7 @@ AIC Value
 1
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2012,10 +1995,10 @@ O
 2
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2048,13 +2031,13 @@ O
 3
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2085,16 +2068,16 @@ O
 4
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2123,19 +2106,19 @@ O
 5
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2160,22 +2143,22 @@ O
 6
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2198,26 +2181,26 @@ O
 7
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2236,29 +2219,29 @@ O
 8
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2275,19 +2258,10 @@ O
 9
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2296,7 +2270,16 @@ O
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2313,19 +2296,10 @@ O
 10
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2334,10 +2308,19 @@ O
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2352,29 +2335,29 @@ O
 11
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2391,34 +2374,34 @@ O
 12
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2431,36 +2414,36 @@ O
 13
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 1318.999
@@ -2471,37 +2454,37 @@ O
 14
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 1319.172
@@ -2512,38 +2495,38 @@ O
 15
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 1320.237
@@ -2554,37 +2537,37 @@ O
 16
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 1320.235
@@ -2595,21 +2578,21 @@ O
 17
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2634,24 +2617,24 @@ O
 18
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2674,29 +2657,29 @@ O
 19
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2715,32 +2698,32 @@ O
 20
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2757,31 +2740,31 @@ O
 21
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2798,30 +2781,30 @@ O
 22
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
@@ -2840,37 +2823,37 @@ O
 23
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
-</td>
-<td style="text-align:left;">
-O
+X
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
-O
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+X
 </td>
 <td style="text-align:left;">
 </td>

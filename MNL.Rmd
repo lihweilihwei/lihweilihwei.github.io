@@ -211,7 +211,7 @@ library(kableExtra)
 The table below shows the first 16 rows of the training set. All 8 choice tasks of an individual are preserved. `Case` refers to the individual, while `Task` refers to the choice task.
 
 ```{r}
-kable(modechoice.training[1:16,2:6])
+kable(modechoice.training[1:16,2:6], row.names = FALSE)
 ```
 
 <br></br>
@@ -431,30 +431,30 @@ The stepwise variable selection was executed for its thoroughness.
 models = data.frame(matrix(nrow = 23, ncol = 15))
 colnames(models) = c("model", "weather", "fare", "wait", "ivtt", "access", "Age", "Gender", "Income", "HouseholdType", "HouseholdSize", "Residential", "Cars", "Concession", "AIC Value")
 
-models[1,] = c(1, "O", "", "", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M1), 3))
-models[2,] = c(2, "O", "O", "", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M2), 3))
-models[3,] = c(3, "O", "O", "O", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M3), 3))
-models[4,] = c(4, "O", "O", "O", "O", "", "", "", "", "", "", "", "", "", round(calc.AIC(M4), 3))
-models[5,] = c(5, "O", "O", "", "", "", "O", "", "", "", "", "", "", "", round(calc.AIC(M5), 3))
-models[6,] = c(6, "O", "O", "", "", "", "O", "O", "", "", "", "", "", "", round(calc.AIC(M6), 3))
-models[7,] = c(7, "O", "O", "", "", "", "O", "", "", "O", "", "", "", "", round(calc.AIC(M7), 3))
-models[8,] = c(8, "O", "O", "", "", "", "O", "", "", "O", "O", "", "", "", round(calc.AIC(M8), 3))
-models[9,] = c(9, "O", "O", "", "", "", "O", "", "", "", "O", "", "", "", round(calc.AIC(M9), 3))
-models[10,] = c(10, "O", "O", "", "", "", "O", "", "", "", "O", "O", "", "", round(calc.AIC(M10), 3))
-models[11,] = c(11, "O", "O", "", "", "", "O", "", "O", "", "O", "", "", "", round(calc.AIC(M11), 3))
-models[12,] = c(12, "O", "O", "", "", "", "O", "", "O", "", "O", "", "O", "", round(calc.AIC(M12), 3))
-models[13,] = c(13, "O", "O", "", "", "", "O", "", "O", "", "O", "", "", "O", round(calc.AIC(M13), 3))
-models[14,] = c(14, "O", "O", "O", "", "", "O", "", "O", "", "O", "", "", "O", round(calc.AIC(M14), 3))
-models[15,] = c(15, "O", "O", "O", "O", "", "O", "", "O", "", "O", "", "", "O", round(calc.AIC(M15), 3))
-models[16,] = c(16, "O", "O", "", "O", "", "O", "", "O", "", "O", "", "", "O", round(calc.AIC(M16), 3))
+models[1,] = c(1, "X", "", "", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M1), 3))
+models[2,] = c(2, "X", "X", "", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M2), 3))
+models[3,] = c(3, "X", "X", "X", "", "", "", "", "", "", "", "", "", "", round(calc.AIC(M3), 3))
+models[4,] = c(4, "X", "X", "X", "X", "", "", "", "", "", "", "", "", "", round(calc.AIC(M4), 3))
+models[5,] = c(5, "X", "X", "", "", "", "X", "", "", "", "", "", "", "", round(calc.AIC(M5), 3))
+models[6,] = c(6, "X", "X", "", "", "", "X", "X", "", "", "", "", "", "", round(calc.AIC(M6), 3))
+models[7,] = c(7, "X", "X", "", "", "", "X", "", "", "X", "", "", "", "", round(calc.AIC(M7), 3))
+models[8,] = c(8, "X", "X", "", "", "", "X", "", "", "X", "X", "", "", "", round(calc.AIC(M8), 3))
+models[9,] = c(9, "X", "X", "", "", "", "X", "", "", "", "X", "", "", "", round(calc.AIC(M9), 3))
+models[10,] = c(10, "X", "X", "", "", "", "X", "", "", "", "X", "X", "", "", round(calc.AIC(M10), 3))
+models[11,] = c(11, "X", "X", "", "", "", "X", "", "X", "", "X", "", "", "", round(calc.AIC(M11), 3))
+models[12,] = c(12, "X", "X", "", "", "", "X", "", "X", "", "X", "", "X", "", round(calc.AIC(M12), 3))
+models[13,] = c(13, "X", "X", "", "", "", "X", "", "X", "", "X", "", "", "X", round(calc.AIC(M13), 3))
+models[14,] = c(14, "X", "X", "X", "", "", "X", "", "X", "", "X", "", "", "X", round(calc.AIC(M14), 3))
+models[15,] = c(15, "X", "X", "X", "X", "", "X", "", "X", "", "X", "", "", "X", round(calc.AIC(M15), 3))
+models[16,] = c(16, "X", "X", "", "X", "", "X", "", "X", "", "X", "", "", "X", round(calc.AIC(M16), 3))
 
-models[17,] = c(17, "O", "O", "O", "O", "", "O", "", "", "", "", "", "", "", round(calc.AIC(M17), 3))
-models[18,] = c(18, "O", "O", "O", "O", "", "O", "O", "", "", "", "", "", "", round(calc.AIC(M18), 3))
-models[19,] = c(19, "O", "O", "O", "O", "", "O", "O", "", "O", "", "", "", "", round(calc.AIC(M19), 3))
-models[20,] = c(20, "O", "O", "O", "O", "", "O", "O", "", "O", "O", "", "", "", round(calc.AIC(M20), 3))
-models[21,] = c(21, "O", "O", "O", "O", "", "O", "O", "", "", "O", "", "", "", round(calc.AIC(M21), 3))
-models[22,] = c(22, "O", "O", "O", "O", "", "O", "O", "O", "O", "", "", "", "", round(calc.AIC(M22), 3))
-models[23,] = c(23, "O", "O", "O", "O", "", "O", "O", "O", "O", "", "", "O", "", round(calc.AIC(M23), 3))
+models[17,] = c(17, "X", "X", "X", "X", "", "X", "", "", "", "", "", "", "", round(calc.AIC(M17), 3))
+models[18,] = c(18, "X", "X", "X", "X", "", "X", "X", "", "", "", "", "", "", round(calc.AIC(M18), 3))
+models[19,] = c(19, "X", "X", "X", "X", "", "X", "X", "", "X", "", "", "", "", round(calc.AIC(M19), 3))
+models[20,] = c(20, "X", "X", "X", "X", "", "X", "X", "", "X", "X", "", "", "", round(calc.AIC(M20), 3))
+models[21,] = c(21, "X", "X", "X", "X", "", "X", "X", "", "", "X", "", "", "", round(calc.AIC(M21), 3))
+models[22,] = c(22, "X", "X", "X", "X", "", "X", "X", "X", "X", "", "", "", "", round(calc.AIC(M22), 3))
+models[23,] = c(23, "X", "X", "X", "X", "", "X", "X", "X", "X", "", "", "X", "", round(calc.AIC(M23), 3))
 ```
 
 ```{r echo=FALSE, results="asis"}

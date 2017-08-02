@@ -418,11 +418,11 @@ AIC(M23) #1308.912
 
 There are three broad types of variable selection:
 
-* Forward: Add one variable at a time. Remove this variable if it is not significant. If significant, add another variable.
+* _Forward_: Add one variable at a time. Remove this variable if it is not significant. If significant, add another variable.
 
-* Backward: Add all variables into model. Remove least significant variable each time. 
+* _Backward_: Add all variables into model. Remove least significant variable each time. 
 
-* Stepwise:  Combination of the forward and backward selection techniques.  After each step in which a variable was added, all variables in the model are checked to see if their significance has been reduced below the threshold significance level. If a nonsignificant variable is found, it is removed from the model. A variable can be added or removed from the previous model.
+* _Stepwise_:  Combination of the forward and backward selection techniques.  After each step in which a variable was added, all variables in the model are checked to see if their significance has been reduced below the threshold significance level. If a nonsignificant variable is found, it is removed from the model. A variable can be added or removed from the previous model.
 
 The stepwise variable selection was executed for its thoroughness.
 
